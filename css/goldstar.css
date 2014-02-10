@@ -1,0 +1,749 @@
+/* 
+    Document   : goldstar
+    Created on : Dec 26, 2013, 5:38:38 PM
+    Author     : nhanlt
+    Description: Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.clear {
+    clear: both;
+}
+.hidden {
+    display: none;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+button,
+input,
+select,
+textarea {
+    font-family: arial, sans-serif;
+}
+
+/*===============================GOLDSTAR ADMIN=============================================*/
+
+div.warning {
+    background-color: #fff;
+    border-left: 4px solid #FFD900;
+
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+    box-shadow:         0px 1px 1px 0px rgba(0,0,0,0.1);
+    margin: 5px 0 15px;
+    padding: 1px 12px;
+}
+
+div.warning p{
+    padding: .5em 0;
+    margin: 2px;
+}
+
+
+
+.goldstar-admin .hndle{
+    cursor: auto !important;
+}
+
+.goldstar-admin .child {
+    border: 1px solid #ddd;
+    margin: 0 0 10px;
+}
+
+.goldstar-admin #goldstar-content {
+    background: transparent;
+    border: none;
+}
+
+.goldstar-admin h4.hndle {
+    border-bottom: 1px solid #eee;
+    padding: 8px 12px;
+    margin: 0;
+}
+
+/* --- Override font --- */
+
+.goldstar-admin .metabox-holder h3
+{
+    font-size: 18px;
+}
+
+.goldstar-admin .metabox-holder h4
+{
+    font-size: 16px;
+}
+
+/*//*/
+
+/* Override table */
+
+.goldstar-admin .form-table th {
+    width: 230px;
+    padding: 0px;
+    font-weight: normal;
+}
+
+.goldstar-admin .form-table td {
+    padding: 0px;
+}
+
+.goldstar-admin td.description {
+}
+
+/*//*/
+
+/* Theme input checkbox  */
+
+.goldstar-admin .goldstar-settings-category .row {
+    display: block;
+    width: 250px;
+    float: left;
+}
+
+.goldstar-admin .goldstar-settings-category .row label {
+    text-transform: uppercase;
+}
+
+.goldstar-admin .goldstar-settings-filter-display div.desc{
+    width:  105px;
+    display: block;
+    float: left;
+}
+
+.goldstar-admin .goldstar-settings-filter-display label {
+    padding: 0 5px;
+}
+
+/*//*/
+
+.goldstar-admin #affiliate-key,
+.goldstar-admin .goldstar-status-container {
+    float: left;
+}
+
+.goldstar-admin .goldstar-status-container {
+    padding: 0;
+    margin: 3px;
+}
+
+
+
+.goldstar-admin .goldstar-status-container .goldstar-error .goldstar-message,
+.goldstar-admin .goldstar-status-container .goldstar-success .goldstar-message
+{
+    
+    padding: 2px 0 2px 20px;
+    list-style-type: none;
+}
+
+.goldstar-admin .goldstar-status-container .goldstar-error .goldstar-message {
+    background: url('../img/error.png') no-repeat center left transparent;
+    color: #c33;
+}
+
+.goldstar-admin .goldstar-status-container .goldstar-success .goldstar-message {
+    background: url('../img/accept.png') no-repeat center left transparent;
+    color: #390;
+}
+
+.goldstar-admin .button-primary {
+    float: right;
+}
+
+/* Territori list */
+
+.territory-wrap {
+    margin: 20px;
+}
+.territory-list-container {
+    overflow: auto;
+    height: 450px;
+}
+
+.territory-list-container table {
+    text-align: center;
+}
+
+#choice-territory-id {
+    float: right;
+    margin: 10px;
+}
+
+#TB_ajaxContent {
+    overflow: visible;
+}
+
+#TB_window {
+    overflow: auto;
+    
+    max-height: 550px !important;
+}
+
+/*//*/
+
+/*=============================//GOLDSTAR ADMIN=============================================*/
+
+/*==================================== FRONT END CSS =========================================*/
+
+.goldstar-frontend {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    min-width: 265px !important;
+}
+
+.button.tiny {
+    padding: 0px 18px;
+    background-color: #fb6f00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div.site-content div.entry-content {
+    /*max-width: 700px;*/
+}
+
+.goldstar-frontend .wrap-inner {
+    background-color: transparent;
+}
+
+.goldstar-frontend .produce-wrap,
+.goldstar-frontend .content-can-filter
+{
+    background-color: #fff;
+}
+
+.goldstar-frontend .produce-wrap {
+    margin: 0 0 25px;
+}
+
+.goldstar-frontend .produce-wrap-inner {
+    padding: 0px 20px 1px;
+}
+
+.goldstar-frontend .produce-wrap-inner h2, 
+.goldstar-frontend .row h4.title a {
+    font-style: normal;    
+    font-size: 25pt;
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.goldstar-frontend .produce-wrap-inner h2 {
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.goldstar-frontend .produce-wrap-inner p {
+    margin-bottom: 0px !important;
+}
+
+
+.goldstar-frontend .content-can-filter-inner{
+    padding: 2px;
+}
+
+.goldstar-frontend .header {
+    
+}
+
+.goldstar-frontend .header ul {
+    margin: 0;
+    padding: 17px 0 0 0;
+}
+
+.goldstar-frontend .header .cate {
+    float: left;
+    list-style-type: none;
+    padding: 0 0 17px !important;
+    margin: 0  !important;
+}
+
+.goldstar-frontend .header .cate a {
+    color: #ccc;
+    text-transform: capitalize;
+    padding: 0px 17px;
+    font-size: 16px;
+    border-right: 1px solid #fff;
+    text-decoration: none;
+}
+
+.goldstar-frontend .header .cate a.active {
+    text-decoration: underline;
+}
+
+.goldstar-frontend .header .cate.last a {
+    border-right: none;
+}
+
+.goldstar-frontend .content-inner {
+    position: relative;
+}
+
+#goldstar-list-feed {
+    position: relative;
+}
+
+.goldstar-frontend .content-inner .filter {
+    background-color: #e7e7e7;
+    padding: 13px 17px 13px;
+}
+
+.goldstar-frontend .content-inner .list {
+    padding: 10px 17px;
+}
+
+/*Filter*/
+
+.goldstar-frontend .filter .filter-item {
+    float: left;
+}
+.goldstar-frontend .filter .filter-button-main
+{
+    float: left;
+    margin: 0;
+}
+
+.goldstar-frontend .filter .filter-item input, 
+.goldstar-frontend .filter .filter-item select, 
+.goldstar-frontend .filter a.button {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.goldstar-frontend .filter .filter-item input {
+    width: 100px;
+}
+
+.goldstar-frontend .filter .filter-item input,
+.goldstar-frontend .filter .filter-item select {
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+}
+
+.goldstar-frontend .filter a.button {
+    padding: 2px 13px;
+    display: inline-block;
+    margin: 0 0 2px 0;
+}
+
+.goldstar-frontend .filter .filter-item select {
+    background: #fff;
+    margin: 0 5px 1px 0;
+}
+
+.goldstar-frontend .filter .button {
+    background: #777;
+    color: #fff;
+}
+.goldstar-frontend .filter .button.active {
+    background: #82c400 !important;
+}
+.goldstar-frontend .filter .date-filter-from-to,
+.goldstar-frontend .filter .date-util
+{
+    float: left;
+    margin: 0 0 8px 0;
+}
+
+.goldstar-frontend .filter .date-filter-from-to {
+    margin: 0 15px 10px 0;
+}
+
+.goldstar-frontend .filter .date-filter-from-to .date-filter-from-wrapper{
+    float: left;
+    width: 121px;
+    margin: 0 3px 1px 0;
+}
+
+.goldstar-frontend .filter .date-filter-from-to .date-filter-to-wrapper{
+    float: left;
+    width: 121px;
+}
+
+.goldstar-frontend .filter .date-filter-from-to img {
+    display: inline-block;
+    vertical-align: top;   
+}
+
+.goldstar-frontend .filter .date-filter-from-to input {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    max-width: 100%;
+    vertical-align: baseline;
+    height: 25px;
+}
+
+span.line {
+    margin: 0 5px;
+    color: #ddd;
+}
+
+#choice-from-date {
+    margin: 0 3px 0 0;
+    height: 21px;
+}
+
+#choice-to-date {
+    margin: 0 12px 0 0;
+    height: 21px;
+}
+
+.goldstar-frontend .filter a.button-primary {
+    float:left;
+    background: #1e8cbe;
+    padding: 2px 13px;
+    margin: 1px 0 0 0;
+}   
+
+/*//*/
+
+/*Row*/
+
+.goldstar-frontend .row {
+    margin: 10px 0 0 0;
+    border-bottom: 1px solid #000;
+    padding: 10px 0 15px 0;
+}
+
+.goldstar-frontend .row h4.title {
+    margin: 0;
+    padding: 0;
+}
+
+.goldstar-frontend .row h4.title a{
+    text-decoration: none;
+    margin: 5px 0;
+    padding: 0px;
+    line-height: 35px;
+}
+.goldstar-frontend .row h4.title a:hover {
+    text-decoration: underline;
+}
+
+.goldstar-frontend .row span.address {
+    font-size: 16px;
+    color: #777777;
+}
+
+.goldstar-frontend .row .row-main {
+    float: left;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+.goldstar-frontend .row .row-main a.img,
+.goldstar-frontend .row .row-main .information
+{
+    float: left;
+}
+
+.goldstar-frontend .row .row-main a.img {
+    width: 40%;
+    margin: 5px 0 0 0;
+    height: auto;
+    min-height: 100px;
+}
+
+.goldstar-frontend .row .row-main .information {
+    width: 60%;
+}
+
+.goldstar-frontend .row .row-main .information .information-inner {
+    margin: 0 0 0 10px;
+    width: 100%;
+    float: left;
+}
+
+.goldstar-frontend .row .row-main .information .information-left,
+.goldstar-frontend .row .row-main .information .information-right
+{
+    width: 50%;
+    float: left;
+    min-height: 100px;
+}
+.goldstar-frontend .row .row-main .information .information-right .button-container {
+    padding: 2px 0 0;
+}
+
+
+.goldstar-frontend .row .row-main .information .information-left .offer-date {
+    margin: 0 20px 0 0;
+    font-size: 16px;
+}
+
+.goldstar-frontend .row .row-main img.img {
+    float: left;
+}
+.goldstar-frontend .row .row-main .expand-summary {
+    text-decoration: none;
+}
+
+.goldstar-frontend .row .summary p.summary-short,
+.goldstar-frontend .row .summary p.summary-full {
+    text-align: justify;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.goldstar-frontend .row a{
+    color: #333;
+    text-decoration: none;
+}
+
+.goldstar-frontend .row .offer-date,
+.goldstar-frontend .row .full-price, 
+.goldstar-frontend .row .our-price{
+}
+
+.goldstar-frontend .row .offer-date {
+    font-size: 12px;
+    font-weight: normal; 
+}
+
+.goldstar-frontend .row .offer-date br{
+    line-height: 22px;
+}
+
+.goldstar-frontend .row .offer-date .offer-date-title,
+.goldstar-frontend .row .full-price .full-price-title,
+.goldstar-frontend .row .our-price .our-price-title
+{
+    font-weight: normal;
+    font-size: 12px;
+    margin: 0 5px 0 0 ;
+    text-transform: uppercase;
+    color: #999;
+    display: block;
+}
+.goldstar-frontend .row .offer-date .offer-date-title {
+    font-weight: normal;
+}
+
+.goldstar-frontend .row .full-price .full-price-title,
+.goldstar-frontend .row .our-price .our-price-title {
+    text-align: center;
+}
+
+.goldstar-frontend .row .full-price .full-price-content,
+.goldstar-frontend .row .our-price .our-price-content
+{
+    font-weight: normal;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+}
+.goldstar-frontend .row .full-price .full-price-content {
+    color: #999;
+}
+.goldstar-frontend .row .our-price .our-price-content {
+    color: #ff6600;
+}
+
+.goldstar-frontend .row .button.large {
+    margin: 20px 0 0 0;
+    
+    width: 144px;
+    background: #fb6f00 !important;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    
+    margin: 0 auto;
+    
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: none !important;
+    
+}
+
+.goldstar-frontend .row .offer-date-content-summary a:hover{
+    text-decoration: underline;
+}
+
+.goldstar-frontend .row .offer-date-content-full a:hover{
+    text-decoration: underline;
+}
+
+.goldstar-frontend .row .summary .summary-short a:hover{
+    text-decoration: underline;
+}
+
+.goldstar-frontend .row .summary .summary-full a:hover{
+    text-decoration: underline;
+
+}
+.goldstar-frontend .row .button.large span {
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+    display: block;
+}
+
+/*//*/
+
+/* Pagination */
+
+.goldstar-frontend .pagination ul:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.goldstar-frontend .pagination ul{
+    background: #fff;
+    padding: 0 0 0 20px;
+}
+
+.goldstar-frontend .pagination ul li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+}
+
+.goldstar-frontend .pagination ul li a,  
+.goldstar-frontend .pagination ul li span
+{
+    display: inline-block;
+    padding: 4px 12px;
+    margin-right: 4px;
+    border-radius: 3px;
+    border: solid 1px #c0c0c0;
+    background: #444;
+    box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+
+.goldstar-frontend .pagination ul li a:hover {
+    background: #346;
+}
+
+.goldstar-frontend .pagination ul li.active a, 
+.goldstar-frontend .pagination ul li.active span{
+    border: solid 1px #c0c0c0;
+    background: #346;
+    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+    color: #fff;
+    text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+    cursor: default;
+}
+/*//*/
+
+/* Loading */
+.goldstar-frontend .goldstar-loading {
+    position: absolute;
+    display: block;
+    z-index: 9999;
+    background: url('../img/loading.gif') no-repeat center center transparent;    
+}
+/*//*/
+
+/* Date time picker */
+.ui-datepicker {
+    font-size: 13px !important;
+}
+/*//*/
+
+
+/* CSS FOR MOBILE */
+.goldstar-frontend.goldstar-mobile  .row .row-main a.img {
+    width: 100%;
+}
+
+.goldstar-frontend.goldstar-mobile  .row .row-main .information {
+    width: 100%;
+}
+
+.goldstar-frontend.goldstar-mobile  .row .row-main .information .information-inner {
+    margin: 10px 0 0 0;
+}
+.goldstar-frontend.goldstar-mobile  .filter .date-filter-from-to {
+    margin: 0 30px 10px 0;      
+}    
+
+.goldstar-frontend.goldstar-mobile  .row h4.title a {
+    font-size: 26px;
+}
+.goldstar-frontend.goldstar-mobile  .row .button.large{
+    width: 130px;
+    
+}
+.goldstar-frontend.goldstar-mobile  .row .button.large span{
+    font-size: 12px;
+} 
+/* END CSS FOR MOBILE */
+
+/* CSS FOR MOBILE SMALL */
+.goldstar-frontend.goldstar-mobile-small  .row .button.large {
+    width: 115px;
+}
+
+.goldstar-frontend.goldstar-mobile-small  .row .button.large span {
+    font-size: 11px;
+}
+
+/* END CSS FOR MOBILE SMALL */
+
+/* OVERRIDE BY DEVICE WIDTH */
+@media only screen
+and (max-device-width : 481px)
+{  
+/* Styles */  
+  .goldstar-frontend .row .row-main a.img {
+    width: 100%;
+  }
+
+  .goldstar-frontend .row .row-main .information {
+    width: 100%;
+  }
+
+  .goldstar-frontend .row .row-main .information .information-inner {
+    margin: 10px 0 0 0;
+  }
+  .goldstar-frontend .filter .date-filter-from-to {
+      margin: 0 30px 10px 0;      
+  }    
+  
+  .goldstar-frontend  .row .button.large{
+    width: 130px;  
+   }
+  .goldstar-frontend  .row .button.large span{
+    font-size: 12px;
+  } 
+  
+}
+/* END OVERRIDE BY DEVICE WIDTH */
+
+/*=============================================================================================*/
