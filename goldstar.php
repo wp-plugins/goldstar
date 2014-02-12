@@ -7,9 +7,9 @@
 /*
   Plugin Name: Goldstar
   Plugin URI: http://wordpress.org/plugins/goldstar/
-  Description: This plugin will provide a basic list of discount ticket offers from goldstar.com
-  Author: Elinext Group
-  Author URI: www.elinext.com
+  Description: Tap into Goldstar's 10,000+ live event deals and promotions with this simple, easy-to-configure plugin.
+  Author: Goldstar
+  Author URI: www.goldstar.com
   Version: 1.0
  */
 
