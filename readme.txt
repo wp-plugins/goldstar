@@ -14,21 +14,23 @@ Tap into Goldstar's 10,000+ live event deals and promotions with this simple, ea
 Goldstar is a WordPress plugin that provides discount ticket offers and promotions from [Goldstar.com](http://goldstar.com). 
 Goldstar.com is free and easy to do that will bring you with many benefit like fun ideas, half-price tickets and everything else you need for a great night out.
 
-This plugin requires a valid API key and customer ID number a issued by Goldstar once you have registered for the [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
+This plugin requires a valid API key and customer ID number as issued by Goldstar once you have registered for the [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
 
 == Installation ==
 
 1. Install Goldstar either via the WordPress.org plugin directory, or by uploading the files to your server.
 
-2. After installing the plugin contact Goldstar to obtain valid API key and customer ID number, [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
+2. After installing the plugin contact Goldstar to obtain valid API key and customer ID number by visiting: [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
 
 3. Enter the API key and customer ID number.
 
-4. Under "Display Setting" you may enter a custom background color for your search bar, sort order for the offer list, and which territory you would like to list offers for. Select a territory ID from the list link and then enter that ID number into the Territory ID field.
+4. Under "Display Settings" you may enter a custom background color for your search bar, sort order for the offer list, and which territory you would like to list offers for. Select a territory ID from the list link and then enter that ID number into the Territory ID field.
 
-5. Click "Save Changes." Once your changes are saved add the following string to a page on your site - including brackets and insert : [goldstar-plugin hour=1 territory_id=#]
+5. Click "Save Changes." Once your changes are saved add the following snippet of code to any page on your site, including brackets and insert: [goldstar-plugin]
 
-6. Other requirements: 
+6. If you would like to add more than one territory you will need to set up a separate page or section and add the following snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number. You may create as many additional territories as you wish by following this format.
+
+7. Other requirements: 
 *Write permission of goldstar/xml directory is required.
 *cURL extension is required.
 *simplexml extension is required.
@@ -37,7 +39,7 @@ This plugin requires a valid API key and customer ID number a issued by Goldstar
 
 == Screenshots ==
 
-1. Admin affiliate ID and API key
+1. Admin affiliate ID and API key validation
 
 2. Admin offer filters
 
