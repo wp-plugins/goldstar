@@ -19,11 +19,11 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 == Installation ==
 
-1. Install the Goldstar plugin either via the WordPress.org plugin directory, or by uploading the files to your server.  Use the “Plugins” tab located in the left-side navbar of the Dashboard.  Select “Add New” from the “Plugins” tab and enter Goldstar.com in the Search box.  Then click on “Install now” link.  After download is complete, click on “Activate Plugin”.
+1. Install the Goldstar plugin either via the WordPress.org plugin directory, or by uploading the files to your server.  Use the "Plugins" tab located in the left-side navbar of the Dashboard.  Select "Add New" from the "Plugins" tab and enter Goldstar.com in the Search box.  Then click on "Install now" link.  After download is complete, click on "Activate Plugin".
 
 2. After installing the plugin contact Goldstar to obtain valid API key and Affiliate ID number, [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
 
-3. Click on the “Settings” link for the Goldstar plugin to build a Half-Price Tickets Page.  Enter the API key and Affiliate ID number. The API key is a long alphanumeric text string and the Affiliate ID is a 4-digit number.
+3. Click on the "Settings" link for the Goldstar plugin to build a Half-Price Tickets Page.  Enter the API key and Affiliate ID number. The API key is a long alphanumeric text string and the Affiliate ID is a 4-digit number.
 
 4. Under "Display Settings" you may enter a custom background color for your search bar, sort order for the offer list, and which territory you would like to list offers for. Select a territory ID from the list link and then enter that ID number into the Territory ID field.  Territories correspond to the cities served by Goldstar.
 
