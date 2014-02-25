@@ -7,13 +7,13 @@ Stable tag: 1.0
 
 License: GPLv2 or later
 
-Tap into Goldstar's 10,000+ live event deals and promotions with this simple, easy-to-configure plugin. 
+Tap into Goldstar's 10,000+ live entertainment offers and promotions with this simple, easy-to-configure plugin.
 
 == Description ==
 
-Goldstar is a WordPress plugin that provides great value and selection on live entertainment tickets. [Goldstar.com](http://goldstar.com) is the first place people go to find something great to do and it's free and easy to use. You'll discover fun event ideas, half-price tickets and everything else you need for a great night out.
+Goldstar is a WordPress plugin that provides great value and selection on live entertainment tickets. [goldstar.com](http://goldstar.com) is the first place people go to find something great to do and it's free and easy to use. You'll discover fun event ideas, half-price tickets and everything else you need for a great night out.
 
-Goldstar event listings are attractive content for your blog and you can earn money from new Goldstar free member signups or ticket sales.
+Goldstar event listings are attractive content for your blog, and you'll earn money through Goldstar free member signups or ticket sales.
 
 This plugin requires a valid API key and Affiliate ID number as issued by Goldstar once you have registered and been accepted into the [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
 
