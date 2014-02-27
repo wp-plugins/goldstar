@@ -2,7 +2,7 @@
 
 /**
  * @package Goldstar plugin
- * @version 1.0
+ * @version 1.2
  */
 /*
   Plugin Name: Goldstar
@@ -10,7 +10,7 @@
   Description: Tap into Goldstar's 10,000+ live event deals and promotions with this simple, easy-to-configure plugin.
   Author: Goldstar
   Author URI: www.goldstar.com
-  Version: 1.0
+  Version: 1.2
  */
 
 /* Some event will fire the first when active or deactive plugin */

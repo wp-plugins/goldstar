@@ -3,7 +3,7 @@ Contributors: NhanLT, TuanNQ, jef
 Tags: goldstar, ticket, discount
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 1.0
+Stable tag: 1.2
 
 License: GPLv2 or later
 
@@ -51,3 +51,12 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 * Provides list of discount offers with affiliate ID tracking
 * Provides date, location and price search filters
 * Provides links directly to Goldstar's ticket purchasing page
+
+= 1.1 =
+
+* Readme file updates
+
+= 1.2 =
+
+* All category check box fields are now pre-selected.
+* Additional error messages added.
