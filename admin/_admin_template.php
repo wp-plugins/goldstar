@@ -1,4 +1,11 @@
-<div class="wrap goldstar-admin">  
+<?php
+// $is_show_error: show error or not
+// $goldstar_options['api_key']: api key
+// $goldstar_options['api_valid']: api valid or not
+// $is_show_error == false mean: at the first time don't save any api
+?>
+
+<div class="wrap goldstar-admin">
     <?php settings_errors(); ?>
     <div id="icon-edit-pages" class="icon32"></div>
     <h2>Add New Post</h2>
@@ -9,7 +16,7 @@
 
     <div id="goldstar-body" class="metabox-holder columns-2">
         <div id="goldstar-body-content">
-            <form method="post" action="options.php">
+            <form method="post" action="options.php" id="goldstar-settings-form">
             <?php settings_fields('goldstar-group'); 
             do_settings_sections( 'goldstar-group' ); ?>
             <!--titlediv-->
@@ -180,4 +187,9 @@
 <script type="text/javascript">
     var goldstar_obj = goldstar_obj || {};
     goldstar_obj.admin_url = '<?php echo $admin_url ?>';
+
+    <?php
+    if($is_show_error == true && $goldstar_options['api_valid'] == 1): ?>
+        goldstar_obj.list_territory_id = <?php echo Goldstar_API::getTerritories($goldstar_options['api_key'], true); ?>
+    <?php endif; ?>
 </script>

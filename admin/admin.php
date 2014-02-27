@@ -40,8 +40,11 @@ function goldstar_validate_options($input) {
         }        
         
         $input['list_territory_id'] = $arr_territory_id;
-        
-        usort($input['category'], 'sort_array_by_alphabe_normal');
+
+        if(!empty($input['category'])) {
+            usort($input['category'], 'sort_array_by_alphabe_normal');
+        }
+
     }
     
     return $input;
@@ -92,14 +95,16 @@ function goldstar_get_categories() {
     // The $_REQUEST contains all the data sent via ajax
     if ( isset($_REQUEST['api_key']) ) {
         $api_key = $_REQUEST['api_key'];
-        $arr_data = Goldstar_API::getCategories($api_key);
+        $arr_data = Goldstar_API::getCategories($api_key); // Data empty mean
         
         $goldstar_options = get_option('goldstar_options');
         $arr_select_category = $goldstar_options['category'];
+        $arr_list_territory_id = Goldstar_API::getTerritories($api_key); // save the first time for check territory
         
         echo json_encode(array(
             'list_category' => $arr_data,
             'list_select_category' => $arr_select_category,
+            'list_territory_id' => $arr_list_territory_id,
         ));
     }
     // Always die in functions echoing ajax content
