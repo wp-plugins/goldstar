@@ -3,7 +3,7 @@ Contributors: NhanLT, TuanNQ, jef
 Tags: goldstar, ticket, discount
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 1.2
+Stable tag: 1.2.1
 
 License: GPLv2 or later
 
@@ -60,3 +60,9 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 * All category check box fields are now pre-selected.
 * Additional error messages added.
+
+= 1.2.1 =
+
+* Search bar icon wrapping fix.
+* Search bar spacing fix.
+* Constraining of offer image size fix.
