@@ -11,6 +11,7 @@ root {
 
 .clear {
     clear: both;
+    height: auto !important;
 }
 .hidden {
     display: none;
@@ -210,6 +211,7 @@ div.warning p{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     min-width: 265px !important;
+    color: #141412;
 }
 
 .button.tiny {
@@ -245,7 +247,7 @@ div.site-content div.entry-content {
 .goldstar-frontend .row h4.title a {
     font-style: normal;    
     font-size: 25pt;
-    color: #333;
+    color: #333 !important;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -306,7 +308,7 @@ div.site-content div.entry-content {
 
 .goldstar-frontend .content-inner .filter {
     background-color: #e7e7e7;
-    padding: 13px 17px 13px;
+    padding: 13px 17px 0px;
 }
 
 .goldstar-frontend .content-inner .list {
@@ -314,7 +316,11 @@ div.site-content div.entry-content {
 }
 
 /*Filter*/
-
+.goldstar-frontend .filter .price-filter.filter-item,
+.goldstar-frontend .filter .location-filter.filter-item
+ {
+    margin: 0 0 15px 0;
+}
 .goldstar-frontend .filter .filter-item {
     float: left;
 }
@@ -347,6 +353,7 @@ div.site-content div.entry-content {
     padding: 2px 13px;
     display: inline-block;
     margin: 0 0 2px 0;
+    font-weight: bold;
 }
 
 .goldstar-frontend .filter .filter-item select {
@@ -365,7 +372,7 @@ div.site-content div.entry-content {
 .goldstar-frontend .filter .date-util
 {
     float: left;
-    margin: 0 0 8px 0;
+    margin: 0 11px 8px 0;
 }
 
 .goldstar-frontend .filter .date-filter-from-to {
@@ -384,17 +391,243 @@ div.site-content div.entry-content {
 }
 
 .goldstar-frontend .filter .date-filter-from-to img {
+    background-position: 0% 0%;
+    border-collapse: separate;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    bottom: auto;
+    box-sizing: content-box;
+    caption-side: top;
+    clear: none;
+    clip: auto;
+    cursor: auto;
+    direction: ltr;
     display: inline-block;
-    vertical-align: top;   
+    empty-cells: show;
+    float: none;
+    font-kerning: auto;
+    height: 24px;
+    image-rendering: auto;
+    left: auto;
+    letter-spacing: normal;
+    max-height: none;
+    max-width: 100%;
+    min-height: 0px;
+    min-width: 0px;
+    object-fit: fill;
+    object-position: 50% 50%;
+    opacity: 1;
+    orphans: auto;
+    outline-offset: 0px;
+    overflow-wrap: break-word;
+    page-break-after: auto;
+    page-break-before: auto;
+    page-break-inside: auto;
+    pointer-events: auto;
+    position: relative;
+    resize: none;
+    right: auto;
+    speak: normal;
+    table-layout: auto;
+    tab-size: 8;
+    text-align: start;
+    text-indent: 0px;
+    text-rendering: auto;
+    text-shadow: none;
+    text-overflow: clip;
+    text-transform: none;
+    top: auto;
+    touch-action-delay: script;
+    unicode-bidi: normal;
+    vertical-align: top;
+    visibility: visible;
+    white-space: normal;
+    widows: auto;
+    width: 21px;
+    word-break: normal;
+    word-spacing: 0px;
+    word-wrap: break-word;
+    z-index: auto;
+    zoom: 1;
+    align-content: stretch;
+    align-items: stretch;
+    align-self: stretch;
+    justify-content: flex-start;
+    order: 0;
+    buffered-rendering: auto;
+    clip-path: none;
+    clip-rule: nonzero;
+    mask: none;
+    filter: none;
+    flood-color: rgb(0, 0, 0);
+    flood-opacity: 1;
+    stop-color: rgb(0, 0, 0);
+    stop-opacity: 1;
+    marker-end: none;
+    marker-mid: none;
+    marker-start: none;
+    mask-type: luminance;
+    shape-rendering: auto;
+    stroke: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-opacity: 1;
+    stroke-width: 1;
+    alignment-baseline: auto;
+    baseline-shift: baseline;
+    dominant-baseline: auto;
+    kerning: 0;
+    text-anchor: start;
+    writing-mode: lr-tb;
+    glyph-orientation-horizontal: 0deg;
+    glyph-orientation-vertical: auto;
+    vector-effect: none;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(121, 121, 121);
+    border-radius: 0px 0px 0px 0px;
+    border-image: none;
+    border-spacing: 0px 0px;
+    flex: 0 1 auto;
+    flex-flow: row nowrap;
+    font: normal normal normal 12px/18px Arial, Helvetica, sans-serif;
+    list-style: disc outside none;
+    margin: 0px;
+    overflow: visible;
+    padding: 0px;
+    transition: all 0s ease 0s;
 }
 
 .goldstar-frontend .filter .date-filter-from-to input {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    background-position: 0% 0%;
+    border-collapse: separate;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    bottom: auto;
+    box-shadow: none;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    margin: 0;
-    max-width: 100%;
-    vertical-align: baseline;
+    caption-side: top;
+    clear: none;
+    clip: auto;
+    color: rgb(102, 102, 102);
+    cursor: auto;
+    direction: ltr;
+    display: inline-block;
+    empty-cells: show;
+    float: none;
+    font-kerning: auto;
     height: 25px;
+    image-rendering: auto;
+    left: auto;
+    letter-spacing: normal;
+    max-height: none;
+    max-width: 100%;
+    min-height: 0px;
+    min-width: 0px;
+    object-fit: fill;
+    object-position: 50% 50%;
+    opacity: 1;
+    orphans: auto;
+    outline-offset: 0px;
+    overflow-wrap: break-word;
+    page-break-after: auto;
+    page-break-before: auto;
+    page-break-inside: auto;
+    pointer-events: auto;
+    position: static;
+    resize: none;
+    right: auto;
+    speak: normal;
+    table-layout: auto;
+    tab-size: 8;
+    text-align: start;
+    text-decoration: none solid rgb(102, 102, 102);
+    text-indent: 0px;
+    text-rendering: auto;
+    text-shadow: none;
+    text-overflow: clip;
+    text-transform: none;
+    top: auto;
+    touch-action-delay: script;
+    unicode-bidi: normal;
+    vertical-align: baseline;
+    visibility: visible;
+    white-space: normal;
+    widows: auto;
+    width: 100px;
+    word-break: normal;
+    word-spacing: 0px;
+    word-wrap: break-word;
+    z-index: auto;
+    zoom: 1;
+    align-content: stretch;
+    align-items: stretch;
+    align-self: stretch;
+    justify-content: flex-start;
+    order: 0;
+    buffered-rendering: auto;
+    clip-path: none;
+    clip-rule: nonzero;
+    mask: none;
+    filter: none;
+    flood-color: rgb(0, 0, 0);
+    flood-opacity: 1;
+    lighting-color: rgb(255, 255, 255);
+    stop-color: rgb(0, 0, 0);
+    stop-opacity: 1;
+    color-interpolation: srgb;
+    color-interpolation-filters: linearrgb;
+    color-rendering: auto;
+    fill: #000000;
+    fill-opacity: 1;
+    fill-rule: nonzero;
+    marker-end: none;
+    marker-mid: none;
+    marker-start: none;
+    mask-type: luminance;
+    shape-rendering: auto;
+    stroke: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-opacity: 1;
+    stroke-width: 1;
+    alignment-baseline: auto;
+    baseline-shift: baseline;
+    dominant-baseline: auto;
+    kerning: 0;
+    text-anchor: start;
+    writing-mode: lr-tb;
+    glyph-orientation-horizontal: 0deg;
+    glyph-orientation-vertical: auto;
+    vector-effect: none;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px 4px 4px 4px;
+    border-image: none;
+    border-spacing: 0px 0px;
+    flex: 0 1 auto;
+    flex-flow: row nowrap;
+    font: normal normal normal 14px/normal arial, sans-serif;
+    list-style: disc outside none;
+    margin: 0px;
+    outline: rgb(102, 102, 102) none 0px;
+    overflow: visible;
+    padding: 4px 10px;
+    transition: all 0s ease 0s;
 }
 
 span.line {
@@ -470,10 +703,13 @@ span.line {
 
 .goldstar-frontend .row .row-main .information {
     width: 60%;
+    padding: 0 0 0 10px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 .goldstar-frontend .row .row-main .information .information-inner {
-    margin: 0 0 0 10px;
     width: 100%;
     float: left;
 }
@@ -497,6 +733,7 @@ span.line {
 
 .goldstar-frontend .row .row-main img.img {
     float: left;
+    width: 100%;
 }
 .goldstar-frontend .row .row-main .expand-summary {
     text-decoration: none;
@@ -511,7 +748,7 @@ span.line {
 }
 
 .goldstar-frontend .row a{
-    color: #333;
+    color: #333 !important;
     text-decoration: none;
 }
 
@@ -556,6 +793,7 @@ span.line {
     font-size: 24px;
     display: block;
     text-align: center;
+    line-height: 41px !important;
 }
 .goldstar-frontend .row .full-price .full-price-content {
     color: #999;
@@ -603,6 +841,7 @@ span.line {
     color: #fff;
     font-size: 14px;
     display: block;
+    font-weight: normal;
 }
 
 /*//*/

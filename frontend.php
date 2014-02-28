@@ -59,6 +59,7 @@ class Goldstar_Shortcode {
         $plugin_territory_id = $territory_id;
         
         // If not provide territory_id or territory_id is invalid will use default
+        $goldstar_list_territory_id = (array)$goldstar_list_territory_id;
         if($plugin_territory_id === self::$territory_none || !in_array($plugin_territory_id, $goldstar_list_territory_id)) {
             $plugin_territory_id = $goldstar_territory_id;
         }
@@ -119,7 +120,7 @@ class Goldstar_Shortcode {
             update_option('goldstar_options', $goldstar_options);
             
             $xml->asXML($filename);
-            chmod($filename, 0755);
+            @chmod($filename, 0755);
 
             $updated = date("F d Y H:i:s.", filemtime($filename));
         } else {
