@@ -101,7 +101,7 @@ class Goldstar_Shortcode {
             
             /* Allow access xml by http protocol */
 
-            try{
+            try {
                 $xml = Goldstar_Common::request($url);
             }
             catch(Exception $e) {
@@ -193,7 +193,13 @@ class Goldstar_Shortcode {
             $repagination = isset($_REQUEST['repagination']) ? $_REQUEST['repagination'] : '';
             $category     = isset($_REQUEST['category']) ? stripslashes($_REQUEST['category']) : '';
             $plugin_territory_id = isset($_REQUEST['plugin_territory_id']) ? $_REQUEST['plugin_territory_id'] : '';
-
+            
+            // Get categories selected in the backend
+            $goldstar_options = get_option('goldstar_options');
+            if (! $category) {
+                $category = $goldstar_options['category'];
+            }
+            
             $arr_filter = array(
                 'page'         => $page,
                 'from_date'    => $from_date,
@@ -205,8 +211,13 @@ class Goldstar_Shortcode {
                 'plugin_territory_id' => $plugin_territory_id,
             );
 
-            $arr_events = self::get_list_events_data($arr_filter);
-
+            // If no category is selected, then don't show any offer
+            if (empty($goldstar_options['category'])) {
+                $arr_events = array();
+            } else {
+                $arr_events = self::get_list_events_data($arr_filter);
+            }
+            
             $str_html = self::get_html_list_events($arr_events, $arr_filter);
 
             echo $str_html;
@@ -217,13 +228,13 @@ class Goldstar_Shortcode {
 
     public static function get_list_events_data($arr_filter) {
         $page_size = self::$page_size;
-
+        
         $filename = dirname(__FILE__) . "/xml/goldstar-{$arr_filter['plugin_territory_id']}.xml";
 
         $xml = simplexml_load_file($filename);
-
+            
         $xpath_query = self::_get_xpath_query($arr_filter);
-
+        
         $events = $xml->xpath($xpath_query);
         
         // Sort data 
@@ -231,6 +242,9 @@ class Goldstar_Shortcode {
         $settings_display_order = isset($goldstar_options['settings_display_order']) ?  $goldstar_options['settings_display_order']: 'START-DATE-ASC';
         $events = self::_sort_events($events, $settings_display_order);
         
+        if (empty($goldstar_options['category'])) {
+            return array();
+        }
         return $events;
     }
     
@@ -277,7 +291,7 @@ class Goldstar_Shortcode {
      * @param type $arr_filter
      */
     private static function _get_xpath_query($arr_filter) {
-
+        
         $arr_condition = array();
         if (!empty($arr_filter['from_date'])) {
             $_date           = str_replace(self::$delimiter_date, '', $arr_filter['from_date']);
@@ -293,10 +307,19 @@ class Goldstar_Shortcode {
             $arr_condition[] = 'venue/address/locality="'.$arr_filter['location'].'"';
         }
         
+        $category_list_where = '';
         if (!empty($arr_filter['category'])) {
-            $arr_condition[] = 'category_list/category/name="'.$arr_filter['category'].'"';
+            if (is_array($arr_filter['category'])) {
+                $arr_categories_list = array();
+                foreach ($arr_filter['category'] as $category) {
+                    $arr_categories_list[] = 'category_list/category/name="'.$category.'"';
+                }
+                $arr_condition[] = '('. implode(' or ', $arr_categories_list) . ')';
+            } else {
+                $arr_condition[] = 'category_list/category/name="'.$arr_filter['category'].'"';
+            }
         }
-
+        
         if (!empty($arr_filter['price'])) {
             /* Parse price */
             if ($arr_filter['price'] === 'free') {
@@ -317,7 +340,7 @@ class Goldstar_Shortcode {
         if (!empty($arr_condition)) {
             $xpath_query .= '[' . implode(" and ", $arr_condition) . ']';
         }
-
+        
         return $xpath_query;
     }
 
@@ -439,7 +462,6 @@ function sort_by_price_slow($a, $b) {
         return false;
     }
     elseif(strpos($a_price, 'SOLD OUT') !== false) {
-        
         return true;
     }
     elseif(strpos($b_price, 'n/a') !== false) {
@@ -465,7 +487,7 @@ function sort_by_price_slow($a, $b) {
         
         return $a_price > $b_price;
     }
-    if(strpos($a_price, 'COMP')!== false) {
+    if(strpos($a_price, 'COMP') !== false) {
         return false;
     }
     elseif(strpos($b_price, 'COMP') !== false) {
@@ -475,7 +497,6 @@ function sort_by_price_slow($a, $b) {
     // Increase
     return $a_price > $b_price;
 }
-
 
 function sort_array_by_alphabe_normal($a, $b) {
     return strcasecmp($a,$b);

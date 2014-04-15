@@ -117,13 +117,14 @@ $goldstar_price = array(
                 <?php endif; ?>
                 <div class="list" id="goldstar-list-feed">
                     
-                    <?php 
-                    $arr_events = Goldstar_Shortcode::get_list_events_data(array('page' => 1, 'plugin_territory_id' => $plugin_territory_id));
+                    <?php
+                    $arr_events = Goldstar_Shortcode::get_list_events_data(array('page' => 1, 'plugin_territory_id' => $plugin_territory_id, 'category' => $goldstar_options['category']));
                     $total_event = count($arr_events);
                     
                     $html = Goldstar_Shortcode::get_html_list_events($arr_events, array('page' => 1, 'plugin_territory_id' => $plugin_territory_id));
                     echo $html;
-                    ?>                    
+                    ?>
+                    
                     <div id="goldstar-loading" class="hidden"></div>
                 </div>
                 <div class="pagination" id="goldstar_pagination">
@@ -138,7 +139,6 @@ $goldstar_price = array(
                         var goldstar_extrainfo = goldstar_extrainfo || {};
                         goldstar_extrainfo.plugin_territory_id = '<?php echo $plugin_territory_id ?>';
                 </script>
-                
                 
             </div>
         </div>
