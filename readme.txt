@@ -2,7 +2,7 @@
 Contributors: NhanLT, TuanNQ, jef
 Tags: goldstar, ticket, discount
 Requires at least: 3.3
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 1.2.2
 
 License: GPLv2 or later
