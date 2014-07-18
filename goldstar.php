@@ -2,15 +2,15 @@
 
 /**
  * @package Goldstar plugin
- * @version 1.3.1
+ * @version 1.3.2
  */
 /*
   Plugin Name: Goldstar
   Plugin URI: http://wordpress.org/plugins/goldstar/
-  Description: This plugin will provide a basic list of discount ticket offers from goldstar.com
+  Description: Tap into Goldstar's 10,000+ live entertainment offers and promotions with this simple, easy-to-configure plugin.
   Author: Goldstar
   Author URI: www.goldstar.com
-  Version: 1.3.1
+  Version: 1.3.2
  */
 
 /* Some event will fire the first when active or deactive plugin */
