@@ -45,13 +45,9 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 == Screenshots ==
 
 
-1. API region at admin page
-
-2. Filter at admin page
-
-3. Frontend of plugin
-
-
+1. Admin affiliate ID, API key validation, display filters
+2. Admin display settings
+3. Front end search bar and discount offer
 
 == Changelog ==
 
