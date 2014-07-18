@@ -140,7 +140,7 @@
                         <!-- goldstar-settings-category -->
                         <div class="goldstar-settings-category child" id="goldstar-list-categories">
                             <h4 class="hndle"><span>Category Selection</span></h4>
-                            <div class="inside clearfix">
+                            <div class="inside eli_clearfix">
                                 <?php foreach ($arr_category as $index => $arr_cate): ?>
                                         <div class="row">
                                             <input type="checkbox" name="goldstar_options[category][]" 

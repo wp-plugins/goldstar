@@ -44,35 +44,35 @@ foreach ($arr_datas as $child):
     // Out price range
     $our_price = (string)$child->our_price_range;
 ?>
-<div class="row">
-<h4 class="title">
-    <a target="_blank" href="<?php echo $link ?>"><?php echo $headline_as_text ?></a>
+<div class="eli_row">
+<h4 class="eli_title">
+    <a  class="eli_a" target="_blank" href="<?php echo $link ?>"><?php echo $headline_as_text ?></a>
     </h4>
-<span class="address">
+<span class="eli_address">
     at <?php echo $venue_name.', '.$venue_address ?>
 </span>
-<div class="row-main">
-    <a target="_blank" href="<?php echo $link ?>" class="img"><img src="<?php echo $image ?>" class="img" /></a>
+<div class="eli_row-main">
+    <a target="_blank" href="<?php echo $link ?>" class="eli_img eli_a"><img src="<?php echo $image ?>" class="eli_img" /></a>
 
-    <div class="information">
-        <div class="information-inner">
-            <div class="information-left">
-                <div class="offer-date clear">
+    <div class="eli_information">
+        <div class="eli_information-inner">
+            <div class="eli_information-left">
+                <div class="eli_offer-date eli_clear">
                     <?php if(!empty($offer_dates_full)): ?>
-                    <span class="offer-date-title">
+                    <span class="eli_offer-date-title">
                         OFFER DATES:
                     </span>
                     <?php if(!empty($offer_dates_summary)): ?>
-                    <div class="offer-date-content-summary">
+                    <div class="eli_offer-date-content-summary">
                         <?php echo $offer_dates_summary; ?><br/>
-                        <a target="_blank" href="<?php echo $link ?>" class="expand-offer-date">+ <?php echo count($date_array) - $numShowDate; ?> more dates</a>
+                        <a target="_blank" href="<?php echo $link ?>" class="eli_expand-offer-date eli_a">+ <?php echo count($date_array) - $numShowDate; ?> more dates</a>
                     </div>
                     <?php endif; ?>
-                    <div class="offer-date-content-full <?php if(!empty($offer_dates_summary)) { echo 'hidden'; } ?>">
+                    <div class="eli_offer-date-content-full <?php if(!empty($offer_dates_summary)) { echo 'eli_hidden'; } ?>">
                         <?php echo $offer_dates_full; ?>
                         <?php if(!empty($offer_dates_summary)): ?>
-                            <br/>
-                            <a href="javascript:void(0);" class="collapse-offer-date">[less-]</a>
+                            <br class="eli_br"/>
+                            <a href="javascript:void(0);" class="eli_collapse-offer-date eli_a">[less-]</a>
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
@@ -80,30 +80,30 @@ foreach ($arr_datas as $child):
             </div>
 
 
-            <div class="information-right">
+            <div class="eli_information-right">
                 <?php if(!empty($full_price)): ?>
-                <div class="full-price clear">
-                    <span class="full-price-title">
+                <div class="eli_full-price eli_clear">
+                    <span class="eli_full-price-title">
                         FULL PRICE: 
                     </span>
-                    <span class="full-price-content">
+                    <span class="eli_full-price-content">
                         <?php echo $full_price ?>
                     </span>
                 </div>
                 <?php endif; ?>
 
                 <?php if(!empty($our_price)): ?>
-                <div class="our-price clear">
-                    <span class="our-price-title">
+                <div class="eli_our-price eli_clear">
+                    <span class="eli_our-price-title">
                         OFFER PRICE: 
                     </span>
-                    <span class="our-price-content">
+                    <span class="eli_our-price-content">
                         <?php echo $our_price ?>
                     </span>
                 </div>
                 <?php endif; ?>
-                <div class="button-container">
-                    <a target="_blank" href="<?php print $link ?>" class="button large"><span>Check Availability</span></a>
+                <div class="eli_button-container">
+                    <a target="_blank" href="<?php print $link ?>" class="eli_button eli_large"><span class="eli_span">Check Availability</span></a>
                 </div>
             </div>
         </div>
@@ -111,19 +111,19 @@ foreach ($arr_datas as $child):
 
 </div>
 
-<div class="summary">
-    <p class="summary-short">
+<div class="eli_summary">
+    <p class="eli_summary-short eli_p">
         <?php echo $summary_short ?>
-        <a href="javascript:void(0);" class="expand-summary">[more+]</a>
+        <a href="javascript:void(0);" class="eli_expand-summary eli_a">[more+]</a>
     </p>
-    <p class="summary-full hidden">
+    <p class="eli_summary-full eli_hidden eli_p">
         <?php echo $summary ?>
-        <a href="javascript:void(0);" class="less-summary">[less-]</a>
+        <a href="javascript:void(0);" class="eli_less-summary eli_a">[less-]</a>
     </p>
 </div>
 
 <div style="clear:both"></div>
-</div><!-- #end row -->
+</div><!-- #end eli_row -->
 <?php endforeach; ?>
 
 

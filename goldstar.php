@@ -7,10 +7,10 @@
 /*
   Plugin Name: Goldstar
   Plugin URI: http://wordpress.org/plugins/goldstar/
-  Description: Tap into Goldstar's 10,000+ live event deals and promotions with this simple, easy-to-configure plugin.
-  Author: Goldstar
-  Author URI: www.goldstar.com
-  Version: 1.2.2
+  Description: This plugin will provide a basic list of discount ticket offers from goldstar.com
+  Author: Artsopolis
+  Author URI: www.artsopolis.com
+  Version: 1.3
  */
 
 /* Some event will fire the first when active or deactive plugin */
@@ -20,29 +20,38 @@ function goldstar_active() {
     /* Also use: 
      * - location_{territory_id}
      * - category
+     * - Just create options if it do not exits yet!
      */
-    update_option('goldstar_options', array(
-       'title',
-       'api_key' => '',
-       'territory_id' => '',
-       'affiliate_id' => '',
-       'settings_display_color' => '#000000',
-       'settings_display_order' => 'START-DATE-ASC',
-       'filter_date' => '1',
-       'filter_location' => '1',
-       'filter_price' => '1',
-       'api_valid' => '0',
-       'content' => '',
-       'list_territory_id' => '',
-    ));
+    if(get_option('goldstar_options', false) === false) {
+        update_option('goldstar_options', array(
+            'title',
+            'api_key' => '',
+            'territory_id' => '',
+            'affiliate_id' => '',
+            'settings_display_color' => '#000000',
+            'settings_display_order' => 'START-DATE-ASC',
+            'filter_date' => '1',
+            'filter_location' => '1',
+            'filter_price' => '1',
+            'api_valid' => '0',
+            'content' => '',
+            'list_territory_id' => '',
+        ));
+    }
 }
 register_activation_hook(__FILE__, 'goldstar_active');
 
 // Delete options variable when deactive plugin
 function goldstar_deactive() {
-    delete_option('goldstar_options');
+    // Do nothing
 }
 register_deactivation_hook(__FILE__, 'goldstar_deactive');
+
+register_uninstall_hook(__FILE__, 'goldstar_uninstall_plugin');
+
+function goldstar_uninstall_plugin() {
+    delete_option('goldstar_options');
+}
 
 /*//*/
 
@@ -94,7 +103,7 @@ if (!class_exists("Goldstar_API")) {
          * @param type $api_key
          */
         public static function getCategories($api_key, $is_raw = false) {
-            $url      = self::$category_link . '?api_key=' . $api_key;
+            $url      = self::$category_link . '?api_key=' . urlencode($api_key);
 
             try{
                 $str_data = Goldstar_Common::request($url);
@@ -126,7 +135,7 @@ if (!class_exists("Goldstar_API")) {
          * @return type
          */
         public static function getTerritories($api_key, $is_raw = false) {
-            $url      = self::$territory_link . '?api_key=' . $api_key;
+            $url      = self::$territory_link . '?api_key=' . urlencode($api_key);
             try{
                 $str_data = Goldstar_Common::request($url);
             }

@@ -265,4 +265,4 @@
 
 	};
 
-})(jQuery);
+})(elisoft_jquery);

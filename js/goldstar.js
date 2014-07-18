@@ -9,7 +9,7 @@
         
         /* START PAGINATION AT FIRST */
         if(goldstar_paging.total_event != 0 ) {
-            $("#goldstar_pagination").removeClass('hidden');
+            $("#goldstar_pagination").removeClass('eli_hidden');
             $("#goldstar_pagination").pagination({
                 items: goldstar_paging.total_event,
                 itemsOnPage: goldstar_paging.page_size,
@@ -22,48 +22,54 @@
             });
         }
         else {
-            $("#goldstar_pagination").addClass('hidden');
+            $("#goldstar_pagination").addClass('eli_hidden');
         }
         /* END PAGINATION AT FIRST */
-        
-        $('.expand-summary').live('click',function() {
+
+        $('body').on('click','.eli_expand-summary',function() {
 
             var $this = $(this);
-            var $parent_row = $this.parents('div.summary');
-            var $s_full = $parent_row.find('p.summary-full');
-            var $s_short = $parent_row.find('p.summary-short');
+            var $parent_row = $this.parents('div.eli_summary');
+            var $s_full = $parent_row.find('p.eli_summary-full');
+            var $s_short = $parent_row.find('p.eli_summary-short');
 
-            $s_full.removeClass('hidden')
-            $s_short.addClass('hidden');
+            $s_full.removeClass('eli_hidden')
+            $s_short.addClass('eli_hidden');
 
         });
-        
-        $('.less-summary').live('click',function() {
+
+        $('body').on('click','.eli_less-summary', function() {
 
             var $this = $(this);
-            var $parent_row = $this.parents('div.summary');
-            var $s_full = $parent_row.find('p.summary-full');
-            var $s_short = $parent_row.find('p.summary-short');
+            var $parent_row = $this.parents('div.eli_summary');
+            var $s_full = $parent_row.find('p.eli_summary-full');
+            var $s_short = $parent_row.find('p.eli_summary-short');
 
-            $s_full.addClass('hidden')
-            $s_short.removeClass('hidden');            
+            $s_full.addClass('eli_hidden')
+            $s_short.removeClass('eli_hidden');
 
         });
 
         /* Date time */
-        $("#filter-from-date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            showOn: 'button', 
-            buttonImage: goldstar_obj.calendar_src, 
-            buttonImageOnly: true
-        });
-        
-        $("#filter-to-date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            showOn: 'button', 
-            buttonImage: goldstar_obj.calendar_src, 
-            buttonImageOnly: true
-        });
+        try {
+            $("#filter-from-date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                showOn: 'button',
+                buttonImage: goldstar_obj.calendar_src,
+                buttonImageOnly: true
+            });
+
+            $("#filter-to-date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                showOn: 'button',
+                buttonImage: goldstar_obj.calendar_src,
+                buttonImageOnly: true
+            });
+        }
+        catch(e) {
+            console.log(e);
+        }
+
         /*on("change", function(e) {
             var curDate = $(this).datepicker("getDate");
             var minDate = $("#filter-from-date").datepicker("getDate");
@@ -75,46 +81,51 @@
         });*/
         
         $.fn.goldstar_showLoading = function($jmain_element) {
-    
-            var $r_left = 0;
-            var $r_top = 0;
-            var $r_width = 0;
-            var $r_height = 0;
+            try {
+                var $r_left = 0;
+                var $r_top = 0;
+                var $r_width = 0;
+                var $r_height = 0;
 
-            /* caculate position to show loading */
-            var $screen_width = $(window).width();
-            var $screen_height = $(window).height();
-            
-            var $c_left =$jmain_element.position().left;
-            var $c_width = $jmain_element.outerWidth();
-            
-            var $c_top = $jmain_element.position().top;
-            var $c_height = $jmain_element.outerHeight();
+                /* caculate position to show loading */
+                var $screen_width = $(window).width();
+                var $screen_height = $(window).height();
 
-            var $screen_top_on_d = document.documentElement.scrollTop || document.body.scrollTop;
-            var $screen_left_on_d = document.documentElement.scrollLeft || document.body.scrollLeft;
+                var $c_left =$jmain_element.position().left;
+                var $c_width = $jmain_element.outerWidth();
 
-            $r_left = $c_left;
-            $r_top = $screen_top_on_d - $jmain_element.offset().top
-            $r_width = $c_width;
-            
-            $r_height = $c_height;
+                var $c_top = $jmain_element.position().top;
+                var $c_height = $jmain_element.outerHeight();
 
-            if($screen_top_on_d < $c_top && $screen_top_on_d + $screen_width > $c_top && $screen_top_on_d + $screen_width < $c_top + $c_height) {
-              $r_height = $screen_top_on_d + $screen_height - $jmain_element.offset().top;
+                var $screen_top_on_d = document.documentElement.scrollTop || document.body.scrollTop;
+                var $screen_left_on_d = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+                $r_left = $c_left;
+                $r_top = $screen_top_on_d - $jmain_element.offset().top
+                $r_width = $c_width;
+
+                $r_height = $c_height;
+
+                if($screen_top_on_d < $c_top && $screen_top_on_d + $screen_width > $c_top && $screen_top_on_d + $screen_width < $c_top + $c_height) {
+                    $r_height = $screen_top_on_d + $screen_height - $jmain_element.offset().top;
+                }
+                else if($screen_top_on_d >= $c_top && $screen_top_on_d + $screen_width >= $c_top && $screen_top_on_d + $screen_width <= $c_top + $c_height) {
+                    $r_height = $screen_height;
+                }
+                else if($screen_top_on_d >= $c_top && $screen_top_on_d + $screen_width >= $c_top && $screen_top_on_d + $screen_width > $c_top + $c_height) {
+                    $r_height = $jmain_element.offset().top + $c_height - $screen_top_on_d;
+                }
+                $jmain_element.append('<div class="goldstar-loading" style="left: '+$r_left+'px; top : '+$r_top+'px; width : '+$r_width+'px; height : '+$r_height+'px"></div>');;
+                //console.log('<div class="goldstar-loading" style="left: '+$r_left+'px; top : '+$r_top+'px; width : '+$r_width+'px; height : '+$r_height+'px"></div>');
             }
-            else if($screen_top_on_d >= $c_top && $screen_top_on_d + $screen_width >= $c_top && $screen_top_on_d + $screen_width <= $c_top + $c_height) {
-              $r_height = $screen_height;
+            catch(e){
+                console.log(e);
             }
-            else if($screen_top_on_d >= $c_top && $screen_top_on_d + $screen_width >= $c_top && $screen_top_on_d + $screen_width > $c_top + $c_height) {
-              $r_height = $jmain_element.offset().top + $c_height - $screen_top_on_d;
-            }
-            $jmain_element.append('<div class="goldstar-loading" style="left: '+$r_left+'px; top : '+$r_top+'px; width : '+$r_width+'px; height : '+$r_height+'px"></div>');;
-            //console.log('<div class="goldstar-loading" style="left: '+$r_left+'px; top : '+$r_top+'px; width : '+$r_width+'px; height : '+$r_height+'px"></div>');
+
           };
         
         $.fn.goldstar_hideLoading = function() {
-            $("#goldstar-loading").addClass('hidden');
+            $("#goldstar-loading").addClass('eli_hidden');
         };
         
         $("#choice-today").click(function() {
@@ -122,8 +133,8 @@
             $("#filter-from-date").val($_this.attr('data-date-from'));
             $("#filter-to-date").val($_this.attr('data-date-to'));
             
-            $(".goldstar-frontend .filter .button").removeClass('active');
-            $(this).addClass('active');
+            $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
+            $(this).addClass('eli_active');
             $.fn.update_page(1, 'yes');
         });
         
@@ -133,8 +144,8 @@
             $("#filter-from-date").val($_this.attr('data-date-from'));
             $("#filter-to-date").val($_this.attr('data-date-to'));
             
-            $(".goldstar-frontend .filter .button").removeClass('active');
-            $(this).addClass('active');
+            $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
+            $(this).addClass('eli_active');
             $.fn.update_page(1, 'yes');
         });
         $("#choice-weekend").click(function() {
@@ -142,43 +153,45 @@
             $("#filter-from-date").val($_this.attr('data-date-from'));
             $("#filter-to-date").val($_this.attr('data-date-to'));
             
-            $(".goldstar-frontend .filter .button").removeClass('active');
-            $(this).addClass('active');
+            $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
+            $(this).addClass('eli_active');
             $.fn.update_page(1, 'yes');
         });
         /*//*/
         
-        $(".expand-offer-date").live('click',function() {
+        $('body').on('click',".eli_expand-offer-date", function() {
 
             var $this = $(this);
-            var $parent_row = $this.parents('div.information');
-            var $s_full = $parent_row.find('div.offer-date-content-full');
-            var $s_short = $parent_row.find('div.offer-date-content-summary');
+            var $parent_row = $this.parents('div.eli_information');
+            var $s_full = $parent_row.find('div.eli_offer-date-content-full');
+            var $s_short = $parent_row.find('div.eli_offer-date-content-summary');
 
-            $s_full.removeClass('hidden')
-            $s_short.addClass('hidden');
+            $s_full.removeClass('eli_hidden')
+            $s_short.addClass('eli_hidden');
 
         });
 
-        $(".collapse-offer-date").live('click',function() {
+        $("body").on('click','.eli_collapse-offer-date', function() {
 
             var $this = $(this);
-            var $parent_row = $this.parents('div.information');
-            var $s_full = $parent_row.find('div.offer-date-content-full');
-            var $s_short = $parent_row.find('div.offer-date-content-summary');
+            var $parent_row = $this.parents('div.eli_information');
+            var $s_full = $parent_row.find('div.eli_offer-date-content-full');
+            var $s_short = $parent_row.find('div.eli_offer-date-content-summary');
 
-            $s_full.addClass('hidden')
-            $s_short.removeClass('hidden');
+            $s_full.addClass('eli_hidden')
+            $s_short.removeClass('eli_hidden');
 
         });
         
         $.fn.update_page = function($_page,$_repagination) {
            /* Get condition for filter */
-            var $_from_date = $("#filter-from-date").val();
-            $_from_date = $_from_date === undefined ? '' : $_from_date;
-            
-            var $_to_date = $("#filter-to-date").val();
-            $_to_date = $_to_date === undefined ? '' : $_to_date;
+            var $_filter_from_date = $("#filter-from-date");
+            var $_from_date = $_filter_from_date.val();
+            $_from_date = $_from_date === undefined || $_from_date == $_filter_from_date.attr('placeholder')  ? '' : $_from_date;
+
+            var $_filter_to_date = $("#filter-to-date");
+            var $_to_date = $_filter_to_date.val();
+            $_to_date = $_to_date === undefined || $_to_date == $_filter_to_date.attr('placeholder')  ? '' : $_to_date;
             
             var $_location = $("#filter-by-location").val();
             $_location = $_location === undefined ? '' : $_location;
@@ -218,7 +231,7 @@
                     if($_repagination ==='yes') {
                         /* PAGINATION */
                         if(goldstar_paging.total_event != 0 ) {
-                            $("#goldstar_pagination").removeClass('hidden');
+                            $("#goldstar_pagination").removeClass('eli_hidden');
                             $("#goldstar_pagination").pagination({
                                 items: goldstar_paging.total_event,
                                 itemsOnPage: goldstar_paging.page_size,
@@ -231,13 +244,13 @@
                             });
                         }
                         else {
-                            $("#goldstar_pagination").addClass('hidden');
+                            $("#goldstar_pagination").addClass('eli_hidden');
                         }
                         /* END PAGINATION */
                     }
                     
                     /* scroll to top */
-                    $("html, body").animate({ scrollTop:  $(".goldstar-frontend .content-can-filter").offset().top }, 'slow');
+                    $("html, body").animate({ scrollTop:  $(".goldstar-frontend .eli_content-can-filter").offset().top }, 'slow');
                 },
                 error: function(errorThrown) {
                     console.log(errorThrown);
@@ -246,7 +259,7 @@
         }
         
         /* FILTER BUTTON */
-        $(".goldstar-frontend .content-can-filter-inner .filter select").bind('change', function() {            
+        $(".goldstar-frontend .eli_content-can-filter-inner .eli_filter select.eli_select").bind('change', function() {
             var $_page = 1;
             $.fn.update_page($_page, 'yes');
         });
@@ -259,8 +272,8 @@
             /* Auto choice active */
             var $_from_date = $("#filter-from-date").val();
             var $_to_date = $("#filter-to-date").val();
-            $(".goldstar-frontend .filter .button").removeClass('active');
-            $(".goldstar-frontend .filter .button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('active');
+            $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
+            $(".goldstar-frontend .eli_filter .eli_button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('eli_active');
         });
             
         $("#filter-to-date").bind('change', function(){ 
@@ -270,15 +283,15 @@
             /* Auto choice active */
             var $_from_date = $("#filter-from-date").val();
             var $_to_date = $("#filter-to-date").val();
-            $(".goldstar-frontend .filter .button").removeClass('active');
-            $(".goldstar-frontend .filter .button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('active');
+            $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
+            $(".goldstar-frontend .eli_filter .eli_button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('eli_active');
         });
         /* END FILTER BUTTON */       
         
         /* DETECT VIEW PORT */
         
         $.fn.detectViewPort = function() {
-          var $_container_width = jQuery("#goldstar-list-feed").width();
+          var $_container_width = $("#goldstar-list-feed").width();
           if($_container_width <= 480) {
               $(".goldstar-frontend").addClass('goldstar-mobile');
           }
@@ -296,4 +309,4 @@
         /* END DETECT VIEW PORT */
     });
     
-})(jQuery);
+})(elisoft_jquery);

@@ -150,10 +150,12 @@ class Goldstar_Shortcode {
         wp_register_style('goldstar-css', plugins_url('css/goldstar.css', __FILE__));
         wp_register_style('jquery-ui-css', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css');
 
-        wp_register_script('jquery-ui-js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js', array('jquery'), '1.0');
-        wp_register_script('simple-pagination-js', plugins_url('js/jquery.simplePagination.js', __FILE__), array('jquery'), '1.0', true);
+        wp_register_script('elisoft-jquery', plugins_url('js/jquery.elisoft.js', __FILE__));
 
-        wp_register_script('goldstar-js', plugins_url('js/goldstar.js', __FILE__), array('jquery'), '1.0', true);
+        wp_register_script('elisoft-jquery-ui-js', plugins_url('js/jquery-ui.elisoft.js', __FILE__), array('elisoft-jquery'), '1.0');
+        wp_register_script('elisoft-simple-pagination-js', plugins_url('js/jquery.simplePagination.js', __FILE__), array('elisoft-jquery'), '1.0', true);
+
+        wp_register_script('goldstar-js', plugins_url('js/goldstar.js', __FILE__), array('elisoft-jquery'), '1.0', true);
         wp_localize_script('goldstar-js', 'goldstar_obj', array(
             'calendar_src' => plugins_url('goldstar/img/date-button.gif'),
             'admin_url'    => admin_url('admin-ajax.php'),
@@ -173,9 +175,9 @@ class Goldstar_Shortcode {
         wp_print_styles('goldstar-css');
         wp_print_styles('jquery-ui-css');
 
-        wp_print_scripts('jquery');
-        wp_print_scripts('jquery-ui-js');
-        wp_print_scripts('simple-pagination-js');
+        wp_print_scripts('elisoft-jquery');
+        wp_print_scripts('elisoft-jquery-ui-js');
+        wp_print_scripts('elisoft-simple-pagination-js');
         wp_print_scripts('goldstar-js');
     }
 

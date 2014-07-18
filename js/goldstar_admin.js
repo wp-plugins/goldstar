@@ -60,7 +60,7 @@ function hideLoading() {
 
                         /* API is invalid */
 
-                        if(data['list_category']['error'] !== undefined) {
+                        if(!data['list_category'] || data['list_category']['error'] !== undefined) {
                             $("#goldstar-api-key-success").addClass('hidden');
                             $("#goldstar-api-key-error").removeClass('hidden');
                             $("#affiliate-key-check").val('0');
@@ -81,16 +81,15 @@ function hideLoading() {
                         var _str_check = '';
 
                         if($.isEmptyObject(data['list_select_category'])) {
-                            _str_check = 'checked="true"';
+                            data['list_select_category'] = [];
                         }
 
                          $(data['list_category']).each(function(key, value) {
                             var _cate_slug = value['id'];
 
-                            if(_str_check != '') {
-                                if($.inArray(value['name']+'', data['list_select_category']) !== -1) {
-                                    _str_check = 'checked="true"';
-                                }
+                             _str_check = '';
+                            if($.inArray(value['name']+'', data['list_select_category']) !== -1) {
+                                _str_check = 'checked="true"';
                             }
 
                             _html += '<div class="row">' +

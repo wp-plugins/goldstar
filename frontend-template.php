@@ -18,8 +18,8 @@ $goldstar_price = array(
     '>100'  => "Over $100"
 );
 ?>
-<div class="wrap goldstar-frontend">
-    <div class="wrap-inner">
+<div class="eli_wrap goldstar-frontend">
+    <div class="eli_wrap-inner">
         <?php
         /* Not have any string after remove tags => This is empty string. Don't show it */
         // $is_empty_content = (preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-\*]/s', "",strip_tags($goldstar_content, '<img>')));
@@ -27,14 +27,14 @@ $goldstar_price = array(
         $is_empty_content = empty($goldstar_content);
 
         if(!$is_empty_content || !empty($goldstar_title)): ?>
-        <div class="produce-wrap">
-            <div class="produce-wrap-inner">
+        <div class="eli_produce-wrap">
+            <div class="eli_produce-wrap-inner">
                 <?php if(!empty($goldstar_title)): ?>
-                <h2><?php echo $goldstar_title ?></h2>
+                <h2 class="eli_h2"><?php echo $goldstar_title ?></h2>
                 <?php endif; ?>
 
                 <?php if(!$is_empty_content): ?>
-                <div class="content">
+                <div class="eli_content">
                     <?php echo wpautop($goldstar_content) ?>
                 </div>
                 <?php endif; ?>
@@ -42,45 +42,45 @@ $goldstar_price = array(
         </div>
         <?php endif; ?>
         
-        <div class="content-can-filter">
-        <div class="content-can-filter-inner">  
+        <div class="eli_content-can-filter">
+        <div class="eli_content-can-filter-inner">
             
         
-        <div class="content">
-            <div class="content-inner">
+        <div class="eli_content">
+            <div class="eli_content-inner">
                 <?php if($goldstar_filter_date == 1 || $goldstar_filter_location == 1 || $goldstar_filter_price == 1 ): ?>
-                <div class="filter" style="background-color: <?php echo isset($goldstar_options['settings_display_color']) ? $goldstar_options['settings_display_color']: '#e7e7e7'; ?> !important">
-                    <div class="filter-inner">
+                <div class="eli_filter" style="background-color: <?php echo isset($goldstar_options['settings_display_color']) ? $goldstar_options['settings_display_color']: '#e7e7e7'; ?> !important">
+                    <div class="eli_filter-inner">
                             <?php if($goldstar_filter_date == 1): ?>
-                            <div class="date-filter filter-item">
-                                <div class="date-filter-from-to">
-                                    <div class="date-filter-from-wrapper">
-                                        <input type="text" name="from_date" placeholder="Start date" class="from-date" id="filter-from-date" /> 
+                            <div class="eli_date-filter eli_filter-item">
+                                <div class="eli_date-filter-from-to">
+                                    <div class="eli_date-filter-from-wrapper">
+                                        <input type="text" name="from_date" placeholder="Start date" class="eli_from-date eli_input" id="filter-from-date" />
                                     </div>
-                                    <div class="date-filter-to-wrapper">
-                                        <input type="text" name="to_date" placeholder="End date" class="end-date" id="filter-to-date"/>
+                                    <div class="eli_date-filter-to-wrapper">
+                                        <input type="text" name="to_date" placeholder="End date" class="eli_end-date eli_input" id="filter-to-date"/>
                                     </div>
                                 </div>
-                                <div class="date-util">
+                                <div class="eli_date-util">
                                     <a href="javascript:void(0);" id="choice-today" 
                                        data-date-from="<?php echo date("Y-m-d", time()) ?>"
                                        data-date-to="<?php echo date("Y-m-d", time()) ?>"
-                                       class="button button-gray">Today</a>
+                                       class="eli_button eli_button-gray eli_a">Today</a>
                                     <a href="javascript:void(0);" id="choice-tomorrow"
                                        data-date-from="<?php echo date("Y-m-d", strtotime("+1 day")) ?>"
                                        data-date-to="<?php echo date("Y-m-d", strtotime("+1 day")) ?>"
-                                       class="button button-gray">Tomorrow</a>
+                                       class="eli_button eli_button-gray eli_a">Tomorrow</a>
                                     <a href="javascript:void(0);" id="choice-weekend"
                                        data-date-from="<?php echo date("Y-m-d", strtotime("next Saturday")) ?>"
                                        data-date-to="<?php echo date("Y-m-d", strtotime("next Sunday")) ?>"
-                                       class="button button-gray">This Weekend</a>
+                                       class="eli_button eli_button-gray eli_a">This Weekend</a>
                                 </div>
                             </div>
                             <?php endif; ?>
                         
                             <?php if(!empty($goldstar_category)): ?>
-                            <div class="category-filter filter-item">
-                                <select name="category" placeholder="Category" id="filter-by-category">
+                            <div class="eli_category-filter eli_filter-item">
+                                <select name="category" class="eli_select" placeholder="Category" id="filter-by-category">
                                     <option value=""> Category </option>
                                     <?php foreach($goldstar_category as $cate): ?>
                                         <option value="<?php echo $cate ?>"> <?php echo $cate ?> </option>
@@ -90,8 +90,8 @@ $goldstar_price = array(
                             <?php endif; ?>
                             
                             <?php if($goldstar_filter_location == 1): ?>
-                            <div class="location-filter filter-item">
-                                <select name="location" placeholder="Location" id="filter-by-location">
+                            <div class="eli_location-filter eli_filter-item">
+                                <select name="location" class="eli_select" placeholder="Location" id="filter-by-location">
                                     <option value=""> Location </option>
                                     <?php foreach(${"goldstar_location_$plugin_territory_id"} as $location): ?>
                                         <option value="<?php echo $location ?>"> <?php echo $location ?> </option>
@@ -101,8 +101,8 @@ $goldstar_price = array(
                             <?php endif; ?>
                             
                             <?php if($goldstar_filter_price == 1): ?>
-                            <div class="price-filter filter-item">
-                                <select name="price" placeholder="Price"  id="filter-by-price">
+                            <div class="eli_price-filter eli_filter-item">
+                                <select name="price" placeholder="Price" class="eli_select"  id="filter-by-price">
                                     <option value=""> Price </option>
                                     
                                     <?php foreach($goldstar_price as $index=> $price): ?>
@@ -115,7 +115,7 @@ $goldstar_price = array(
                     </div>
                 </div><!-- #end filter -->
                 <?php endif; ?>
-                <div class="list" id="goldstar-list-feed">
+                <div class="eli_list" id="goldstar-list-feed">
                     
                     <?php
                     $arr_events = Goldstar_Shortcode::get_list_events_data(array('page' => 1, 'plugin_territory_id' => $plugin_territory_id, 'category' => $goldstar_options['category']));
@@ -125,9 +125,9 @@ $goldstar_price = array(
                     echo $html;
                     ?>
                     
-                    <div id="goldstar-loading" class="hidden"></div>
+                    <div id="goldstar-loading" class="eli_hidden"></div>
                 </div>
-                <div class="pagination" id="goldstar_pagination">
+                <div class="eli_pagination" id="goldstar_pagination">
                 </div>
                 
                 <script type="text/javascript">

@@ -23,6 +23,7 @@ function goldstar_validate_options($input) {
     extract($input, EXTR_PREFIX_ALL, 'goldstar'); 
     
     $goldstar_options = get_option('goldstar_options');
+    $input['api_key'] = trim ($input['api_key']); /* clean api key data before save! */
     
     // Save xml file
     $input['has_change_api'] = $goldstar_options['has_change_api'];
