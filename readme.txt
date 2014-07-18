@@ -1,5 +1,5 @@
 === Goldstar ===
-Contributors: nhanlt, tuanphp
+Contributors: nhanlt, tuanphp, jef
 Tags: goldstar, ticket, discount, artsopolis, apollo
 Requires at least: 3.3
 Tested up to: 3.9
@@ -53,4 +53,5 @@ openssl extension is required.
 * Category filtering fix
 
 = 1.3 =
-* Update plugin's css to run compatible with most of themes
+* Update plugin's css to run compatible with most of themes= 1.3.1 =
+* bug fixes and adds two new js files

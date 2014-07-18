@@ -2,15 +2,15 @@
 
 /**
  * @package Goldstar plugin
- * @version 1.2.2
+ * @version 1.3.1
  */
 /*
   Plugin Name: Goldstar
   Plugin URI: http://wordpress.org/plugins/goldstar/
   Description: This plugin will provide a basic list of discount ticket offers from goldstar.com
-  Author: Artsopolis
-  Author URI: www.artsopolis.com
-  Version: 1.3
+  Author: Goldstar
+  Author URI: www.goldstar.com
+  Version: 1.3.1
  */
 
 /* Some event will fire the first when active or deactive plugin */
