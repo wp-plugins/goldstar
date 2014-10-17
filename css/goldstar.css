@@ -196,11 +196,16 @@ div.warning p{
 
 /*==================================== FRONT END CSS =========================================*/
 
+#ui-datepicker-div {
+    z-index: 2 !important;
+}
+
 .goldstar-frontend {
     font-family: Arial, Helvetica, sans-serif;
     font-size: inherit;
     min-width: 265px !important;
     color: #141412;
+    line-height: 24px;
 }
 
 .button.eli_tiny {
@@ -338,6 +343,8 @@ div.warning p{
 }
 
 .goldstar-frontend .eli_filter .eli_filter-item input.eli_input {
+    -moz-box-sizing: border-box;
+       box-sizing: border-box;
     width: 100px !important;
 }
 
@@ -346,6 +353,7 @@ div.warning p{
     border: 1px solid #ccc !important;
     padding: 4px 10px !important;
     margin: 0px !important;
+    background: #fff;
 }
 
 .goldstar-frontend .eli_filter a.eli_button {
@@ -500,6 +508,7 @@ span.eli_line {
     float: left !important;
     width: 100% !important;
     border: none !important;
+    margin: 0 !important;
 }
 .goldstar-frontend .eli_row .eli_row-main .eli_expand-summary {
     text-decoration: none;
@@ -516,6 +525,7 @@ span.eli_line {
 .goldstar-frontend .eli_row a.eli_a{
     color: #333 !important;
     text-decoration: none;
+    padding-left: 0px;
 }
 
 .goldstar-frontend .eli_row .eli_offer-date,

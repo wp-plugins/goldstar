@@ -25,6 +25,8 @@ function hideLoading() {
 
     $(function() {
 
+        $("#settings-display-color").wpColorPicker();
+
         $.fn.checkTerritorIdIsExists = function(territor_id) {
             var isExists = false;
             if($.isEmptyObject(goldstar_obj.list_territory_id)) return false;

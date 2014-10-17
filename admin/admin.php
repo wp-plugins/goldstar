@@ -62,12 +62,14 @@ add_action('admin_print_styles', 'do_css');
 
 function do_css() {
     wp_enqueue_style('thickbox');
+    wp_enqueue_style( 'wp-color-picker' );
 }
 
 function do_jslibs() {
     wp_enqueue_script('editor');
     wp_enqueue_script('thickbox');
-    add_action('admin_head', 'wp_tiny_mce');
+    wp_enqueue_script( 'goldstar-admin', plugins_url('js/goldstar_admin.js', dirname(__FILE__)), array( 'jquery','wp-color-picker' ), '1.0' );
+    
 }
 /*//*/
 
@@ -76,7 +78,6 @@ add_action('admin_head', 'goldstar_admin_plugin_css');
 
 function goldstar_admin_plugin_css() {
     echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('css/goldstar.css', dirname(__FILE__)) . '">';
-    echo '<script type="text/javascript" src="' . plugins_url('js/goldstar_admin.js', dirname(__FILE__)) . '">';
 }
 /*//*/
 

@@ -5,9 +5,9 @@ Contributors: nhanlt, tuanphp, jef
 Tags: goldstar, ticket, discount
 Requires at least: 3.3
 
-Tested up to: 3.9
+Tested up to: 4.0
 
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 
 
@@ -75,3 +75,5 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 * Bug fixes and adds two new js files
 = 1.3.2 =
 * Readme file updates, bug fixes
+= 1.3.3 =
+* CSS compatibility fixes
