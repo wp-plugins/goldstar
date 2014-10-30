@@ -19,6 +19,8 @@ class Goldstar_Shortcode {
     public static $page_size      = 20;
     public static $delimiter_date = '-';
     public static $territory_none = 'none';
+    private static $_goldstar_xml_name = 'goldstar-xml';
+
     public static $arr_display_filter = array(
         'START-DATE-ASC' => 'Start Date',
         'END-DATE-ASC'   => 'End Date',
@@ -43,11 +45,99 @@ class Goldstar_Shortcode {
         add_action('wp_ajax_goldstar_get_feed', array(__CLASS__, 'goldstar_get_feed'));
     }
 
+    private static function _createDirContentXMl() {
+
+        $_upload = WP_CONTENT_DIR.'/uploads';
+
+        $_path_data_xml = $_upload;
+
+        if(!file_exists($_path_data_xml)) {
+            return array(
+                'error' => true,
+                'msg' => "Please create wp-content/uploads directory."
+                );
+        }
+
+        if(is_multisite()) {
+            $sites = get_blog_details(get_current_blog_id());
+            $_final_path_data_xml = $_path_data_xml = $_upload.'/'.self::$_goldstar_xml_name.'/'.$sites->domain;
+            if(file_exists($_path_data_xml)) {
+                if(!is_writable($_path_data_xml)) {
+                    return array(
+                        'error' => true,
+                        'msg' => "Please set write permission to <strong>$_path_data_xml</strong>."
+                    );
+                }
+                else {
+                    return array(
+                        'error' => false,
+                        'msg' => '',
+                        'path' => $_final_path_data_xml,
+                    );
+                }
+
+            }
+        }
+        else {
+            $_final_path_data_xml = $_path_data_xml = $_upload.'/'.self::$_goldstar_xml_name;
+        }
+
+        $_path_data_xml  = $_upload.'/'.self::$_goldstar_xml_name;
+        if(file_exists($_path_data_xml)) {
+            if(!is_writable($_path_data_xml)) {
+                return array(
+                    'error' => true,
+                    'msg' => "Please set write permission to <strong>$_path_data_xml</strong>."
+                );
+            }
+            else {
+                if(is_multisite()) {
+                    mkdir($_final_path_data_xml);
+                }
+
+                return array(
+                    'error' => false,
+                    'msg' => '',
+                    'path' => $_final_path_data_xml,
+                );
+            }
+        }
+
+        $_path_data_xml  = $_upload;
+
+        if(!is_writable($_path_data_xml)) {
+            return array(
+                'error' => true,
+                'msg' => "Please set write permission to <strong>$_path_data_xml</strong>."
+            );
+        }
+        else {
+
+            mkdir($_upload.'/'.self::$_goldstar_xml_name);
+            if(is_multisite()) {
+                mkdir($_final_path_data_xml);
+            }
+
+            return array(
+                'error' => false,
+                'msg' => '',
+                'path' => $_final_path_data_xml,
+            );
+        }
+
+    }
+
     public static function handle_shortcode($atts) {
         self::$add_script = true;
         
         // Parse settings of api
         $goldstar_options = get_option('goldstar_options');
+        $str_error = 'The API is invalid. Please input a valid API Key' . ' (<a href="' . admin_url('plugins.php?page=admin-goldstar') . '">Click here</a>)';
+
+        /* Not config api yet */
+        if($goldstar_options === false) {
+            return $str_error;
+        }
         extract($goldstar_options, EXTR_PREFIX_ALL, 'goldstar');
 
         // actual shortcode handling here
@@ -65,20 +155,14 @@ class Goldstar_Shortcode {
         }
         $plugin_territory_id = (int)$plugin_territory_id;
 
-        $_parent_dir = dirname(__FILE__);
-        $dir_xml =  $_parent_dir. "/xml";
-
-        if (!file_exists($dir_xml)) {
-            if(!is_writable($_parent_dir)) {
-                return "<strong>$dir_xml</strong> cannot created because parent directory is not writable. <br/> Please set write permission to <strong>$_parent_dir</strong>.";
-            }
-            mkdir($dir_xml, 0777);
-        }
-        if(!is_writable($dir_xml)) {
-            return "<strong>$dir_xml</strong> is not writable. <br/> Please set write permission to <strong>$dir_xml</strong>.";
+        $_arrReceived = self::_createDirContentXMl();
+        if($_arrReceived['error']) {
+            return $_arrReceived['msg'];
         }
 
-        $filename = dirname(__FILE__) . "/xml/goldstar-{$plugin_territory_id}.xml";
+        $_path_data_xml = $_arrReceived['path'];
+
+        $filename = $_path_data_xml.'/'."goldstar-{$plugin_territory_id}.xml";
 
         $time     = time(); // by second
         $modified = @filemtime($filename);
@@ -148,14 +232,14 @@ class Goldstar_Shortcode {
 
     public static function register_script() {
         wp_register_style('goldstar-css', plugins_url('css/goldstar.css', __FILE__));
-        wp_register_style('jquery-ui-css', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css');
+        wp_register_style('jquery-ui-css', plugins_url('css/jquery-ui/jquery-ui.css', __FILE__));
 
-        wp_register_script('elisoft-jquery', plugins_url('js/jquery.elisoft.js', __FILE__));
+        //wp_register_script('elisoft-jquery', plugins_url('js/jquery.elisoft.js', __FILE__));
 
-        wp_register_script('elisoft-jquery-ui-js', plugins_url('js/jquery-ui.elisoft.js', __FILE__), array('elisoft-jquery'), '1.0');
-        wp_register_script('elisoft-simple-pagination-js', plugins_url('js/jquery.simplePagination.js', __FILE__), array('elisoft-jquery'), '1.0', true);
+        //wp_register_script('elisoft-jquery-ui-js', plugins_url('js/jquery-ui.elisoft.js', __FILE__), array('elisoft-jquery'), '1.0');
+        wp_register_script('elisoft-simple-pagination-js', plugins_url('js/jquery.simplePagination.js', __FILE__), array('jquery'), '1.0', true);
 
-        wp_register_script('goldstar-js', plugins_url('js/goldstar.js', __FILE__), array('elisoft-jquery'), '1.0', true);
+        wp_register_script('goldstar-js', plugins_url('js/goldstar.js', __FILE__), array('jquery'), '1.0', true);
         wp_localize_script('goldstar-js', 'goldstar_obj', array(
             'calendar_src' => plugins_url('goldstar/img/date-button.gif'),
             'admin_url'    => admin_url('admin-ajax.php'),
@@ -175,8 +259,10 @@ class Goldstar_Shortcode {
         wp_print_styles('goldstar-css');
         wp_print_styles('jquery-ui-css');
 
-        wp_print_scripts('elisoft-jquery');
-        wp_print_scripts('elisoft-jquery-ui-js');
+        wp_print_scripts('jquery');
+        wp_print_scripts('jquery-ui-core');
+        wp_print_scripts('jquery-ui-datepicker');
+
         wp_print_scripts('elisoft-simple-pagination-js');
         wp_print_scripts('goldstar-js');
     }
@@ -230,8 +316,15 @@ class Goldstar_Shortcode {
 
     public static function get_list_events_data($arr_filter) {
         $page_size = self::$page_size;
+
+        $_arrReceived = self::_createDirContentXMl();
+        if($_arrReceived['error']) {
+            return $_arrReceived['msg'];
+        }
+
+        $_path_data_xml = $_arrReceived['path'];
         
-        $filename = dirname(__FILE__) . "/xml/goldstar-{$arr_filter['plugin_territory_id']}.xml";
+        $filename = $_path_data_xml."/goldstar-{$arr_filter['plugin_territory_id']}.xml";
 
         $xml = simplexml_load_file($filename);
             

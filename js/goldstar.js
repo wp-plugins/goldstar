@@ -6,7 +6,12 @@
 
     /* Dom is ready */
     $(function() {
-        
+
+        /* global variable */
+        var $from_date = $('#filter-from-date');
+        var $to_date = $('#filter-to-date');
+
+
         /* START PAGINATION AT FIRST */
         if(goldstar_paging.total_event != 0 ) {
             $("#goldstar_pagination").removeClass('eli_hidden');
@@ -52,14 +57,14 @@
 
         /* Date time */
         try {
-            $("#filter-from-date").datepicker({
+            $from_date.datepicker({
                 dateFormat: 'yy-mm-dd',
                 showOn: 'button',
                 buttonImage: goldstar_obj.calendar_src,
                 buttonImageOnly: true
             });
 
-            $("#filter-to-date").datepicker({
+            $to_date.datepicker({
                 dateFormat: 'yy-mm-dd',
                 showOn: 'button',
                 buttonImage: goldstar_obj.calendar_src,
@@ -72,14 +77,14 @@
 
         /*on("change", function(e) {
             var curDate = $(this).datepicker("getDate");
-            var minDate = $("#filter-from-date").datepicker("getDate");
+            var minDate = $from_date.datepicker("getDate");
 
             if (minDate != null && curDate < minDate) {
                 alert("Invalid date");
                 $(this).datepicker("setDate", minDate);
             }
         });*/
-        
+
         $.fn.goldstar_showLoading = function($jmain_element) {
             try {
                 var $r_left = 0;
@@ -123,42 +128,42 @@
             }
 
           };
-        
+
         $.fn.goldstar_hideLoading = function() {
             $("#goldstar-loading").addClass('eli_hidden');
         };
-        
+
         $("#choice-today").click(function() {
             var $_this = $(this);
-            $("#filter-from-date").val($_this.attr('data-date-from'));
-            $("#filter-to-date").val($_this.attr('data-date-to'));
-            
+            $from_date.val($_this.attr('data-date-from'));
+            $to_date.val($_this.attr('data-date-to'));
+
             $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
             $(this).addClass('eli_active');
             $.fn.update_page(1, 'yes');
         });
-        
-        
+
+
         $("#choice-tomorrow").click(function() {
             var $_this = $(this);
-            $("#filter-from-date").val($_this.attr('data-date-from'));
-            $("#filter-to-date").val($_this.attr('data-date-to'));
-            
+            $from_date.val($_this.attr('data-date-from'));
+            $to_date.val($_this.attr('data-date-to'));
+
             $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
             $(this).addClass('eli_active');
             $.fn.update_page(1, 'yes');
         });
         $("#choice-weekend").click(function() {
             var $_this = $(this);
-            $("#filter-from-date").val($_this.attr('data-date-from'));
-            $("#filter-to-date").val($_this.attr('data-date-to'));
-            
+            $from_date.val($_this.attr('data-date-from'));
+            $to_date.val($_this.attr('data-date-to'));
+
             $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
             $(this).addClass('eli_active');
             $.fn.update_page(1, 'yes');
         });
         /*//*/
-        
+
         $('body').on('click',".eli_expand-offer-date", function() {
 
             var $this = $(this);
@@ -182,27 +187,27 @@
             $s_short.removeClass('eli_hidden');
 
         });
-        
+
         $.fn.update_page = function($_page,$_repagination) {
            /* Get condition for filter */
-            var $_filter_from_date = $("#filter-from-date");
+            var $_filter_from_date = $from_date;
             var $_from_date = $_filter_from_date.val();
             $_from_date = $_from_date === undefined || $_from_date == $_filter_from_date.attr('placeholder')  ? '' : $_from_date;
 
-            var $_filter_to_date = $("#filter-to-date");
+            var $_filter_to_date = $to_date;
             var $_to_date = $_filter_to_date.val();
             $_to_date = $_to_date === undefined || $_to_date == $_filter_to_date.attr('placeholder')  ? '' : $_to_date;
-            
+
             var $_location = $("#filter-by-location").val();
             $_location = $_location === undefined ? '' : $_location;
-            
+
             var $_price = $("#filter-by-price").val();
             $_price = $_price === undefined ? '' : $_price;
-            
+
             var $_category = $("#filter-by-category").val();
-            $_category = $_category === undefined ? '' : $_category; 
+            $_category = $_category === undefined ? '' : $_category;
             /*//*/
-           
+
            /* ajax call */
             $.ajax({
                 url: goldstar_obj.admin_url,
@@ -222,12 +227,12 @@
                 },
                 dataType: 'html',
                 success: function(data) {
-                    
-                    
+
+
                     /* This outputs the result of the ajax request */
                     var $_container_row = $("#goldstar-list-feed");
                     $_container_row.html(data);
-                    
+
                     if($_repagination ==='yes') {
                         /* PAGINATION */
                         if(goldstar_paging.total_event != 0 ) {
@@ -248,7 +253,7 @@
                         }
                         /* END PAGINATION */
                     }
-                    
+
                     /* scroll to top */
                     $("html, body").animate({ scrollTop:  $(".goldstar-frontend .eli_content-can-filter").offset().top }, 'slow');
                 },
@@ -257,47 +262,60 @@
                 }
             }); /*// End ajax*/
         }
-        
+
         /* FILTER BUTTON */
         $(".goldstar-frontend .eli_content-can-filter-inner .eli_filter select.eli_select").bind('change', function() {
             var $_page = 1;
             $.fn.update_page($_page, 'yes');
         });
-        
-        $("#filter-from-date").bind('change', function(){ 
-            $("#filter-to-date").val($("#filter-from-date").val());            
+
+        $from_date.bind('change', function(){
+
+            if($to_date.val() === "") {
+                $to_date.val($from_date.val());
+            }
+
             var $_page = 1;
             $.fn.update_page($_page, 'yes');
-            
+
             /* Auto choice active */
-            var $_from_date = $("#filter-from-date").val();
-            var $_to_date = $("#filter-to-date").val();
+            var $_from_date = $from_date.val();
+            var $_to_date = $to_date.val();
             $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
-            $(".goldstar-frontend .eli_filter .eli_button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('eli_active');
+
+            if($_from_date !== "" && $_to_date !== "") {
+                $(".goldstar-frontend .eli_filter .eli_button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('eli_active');
+            }
+
         });
-            
-        $("#filter-to-date").bind('change', function(){ 
+
+        $to_date.bind('change', function(){
             var $_page = 1;
             $.fn.update_page($_page, 'yes');
-            
+
             /* Auto choice active */
-            var $_from_date = $("#filter-from-date").val();
-            var $_to_date = $("#filter-to-date").val();
+            var $_from_date = $from_date.val();
+            var $_to_date = $to_date.val();
             $(".goldstar-frontend .eli_filter .eli_button").removeClass('eli_active');
-            $(".goldstar-frontend .eli_filter .eli_button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('eli_active');
+
+            if($_from_date !== "" && $_to_date !== "") {
+                $(".goldstar-frontend .eli_filter .eli_button[data-date-from="+$_from_date+"][data-date-to="+$_to_date+"]").addClass('eli_active');
+            }
+
         });
         /* END FILTER BUTTON */       
         
         /* DETECT VIEW PORT */
-        
         $.fn.detectViewPort = function() {
-          var $_container_width = $("#goldstar-list-feed").width();
-          if($_container_width <= 480) {
-              $(".goldstar-frontend").addClass('goldstar-mobile');
-          }
-          else {
-              $(".goldstar-frontend").removeClass('goldstar-mobile');
-          }
+
+            /*  LIMIT AT 480PX */
+            var $_container_width = $("#goldstar-list-feed").width();
+            if($_container_width <= 480) {
+                $(".goldstar-frontend").addClass('goldstar-mobile');
+            }
+            else {
+                $(".goldstar-frontend").removeClass('goldstar-mobile');
+            }
         };
         
         $.fn.detectViewPort();
@@ -309,4 +327,4 @@
         /* END DETECT VIEW PORT */
     });
     
-})(elisoft_jquery);
+})(jQuery);

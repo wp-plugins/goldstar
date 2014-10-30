@@ -30,8 +30,20 @@ foreach ($arr_datas as $child):
     // Venue address
     $venue_address = (string)$child->venue->address->locality;
 
-    // Image
+    /// Image
     $image = (string)$child->image;
+    // 3264 - issue
+    $default_width = 480;
+    $_arr_search = array("https://i.gse.io", "http://i.gse.io");
+    $_arr_replace = array("http://images.goldstar.com");
+    $image = str_replace($_arr_search, $_arr_replace, $image);
+    if(preg_match('/\?([^=]+)=/', $image)) {
+        $image = $image.'&w='.$default_width;
+    }
+    else {
+        $image = $image.'?w='.$default_width;
+    }
+
 
     // Summary 
     $summary = (string)$child->summary_as_text;

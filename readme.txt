@@ -7,7 +7,7 @@ Requires at least: 3.3
 
 Tested up to: 4.0
 
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 
 
@@ -77,3 +77,8 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 * Readme file updates, bug fixes
 = 1.3.3 =
 * CSS compatibility fixes
+
+
+= 1.3.4 =
+* Integrate Goldstar API's image
+* Move xml file to wp-content/uploads/goldstar-xml folder
