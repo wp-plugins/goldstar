@@ -10,7 +10,7 @@
   Description: This plugin will provide a list of discount ticket offers from goldstar.com
   Author: Goldstar
   Author URI: www.goldstar.com
-  Version: 1.3.4
+  Version: 1.3.5
  */
 
 /* Some event will fire the first when active or deactive plugin */
