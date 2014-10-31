@@ -310,7 +310,7 @@
 
             /*  LIMIT AT 250PX */
             var $_container_width = $("#goldstar-list-feed").width();
-            if($_container_width <= 250) {
+            if($_container_width <= 480) {
                 $(".goldstar-frontend").addClass('goldstar-mobile');
             }
             else {

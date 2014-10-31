@@ -33,7 +33,7 @@ foreach ($arr_datas as $child):
     /// Image
     $image = (string)$child->image;
     // 3264 - issue
-    $default_width = 480;
+    $default_width = 250;
     $_arr_search = array("https://i.gse.io", "http://i.gse.io");
     $_arr_replace = array("http://images.goldstar.com");
     $image = str_replace($_arr_search, $_arr_replace, $image);
