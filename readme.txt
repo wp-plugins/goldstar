@@ -7,7 +7,7 @@ Requires at least: 3.3
 
 Tested up to: 4.0
 
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 
 
@@ -85,3 +85,5 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 = 1.3.5 =
 * Default image size modification.
+= 1.3.6 =
+* Consolidated js files, modified default image size, modified container size.
