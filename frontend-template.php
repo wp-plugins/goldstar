@@ -49,7 +49,7 @@ $goldstar_price = array(
         <div class="eli_content">
             <div class="eli_content-inner">
                 <?php if($goldstar_filter_date == 1 || $goldstar_filter_location == 1 || $goldstar_filter_price == 1 ): ?>
-                <div class="eli_filter" style="background-color: <?php echo isset($goldstar_options['settings_display_color']) ? $goldstar_options['settings_display_color']: '#e7e7e7'; ?> !important">
+                <div class="eli_filter" style="background-color: #006091 !important">
                     <div class="eli_filter-inner">
                             <?php if($goldstar_filter_date == 1): ?>
                             <div class="eli_date-filter eli_filter-item">
@@ -79,29 +79,31 @@ $goldstar_price = array(
                             <?php endif; ?>
                         
                             <?php if(!empty($goldstar_category)): ?>
-                            <div class="eli_category-filter eli_filter-item">
+                            <div class="eli_ctn_select eli_category-filter eli_filter-item">
                                 <select name="category" class="eli_select" placeholder="Category" id="filter-by-category">
                                     <option value=""> Category </option>
                                     <?php foreach($goldstar_category as $cate): ?>
                                         <option value="<?php echo $cate ?>"> <?php echo $cate ?> </option>
                                     <?php endforeach; ?>
                                 </select>
+                                <span class="eli_hide_select"></span>
                             </div>
                             <?php endif; ?>
                             
                             <?php if($goldstar_filter_location == 1): ?>
-                            <div class="eli_location-filter eli_filter-item">
+                            <div class="eli_ctn_select eli_location-filter eli_filter-item">
                                 <select name="location" class="eli_select" placeholder="Location" id="filter-by-location">
                                     <option value=""> Location </option>
                                     <?php foreach(${"goldstar_location_$plugin_territory_id"} as $location): ?>
                                         <option value="<?php echo $location ?>"> <?php echo $location ?> </option>
                                     <?php endforeach; ?>
                                 </select>
+                                <span class="eli_hide_select"></span>
                             </div>
                             <?php endif; ?>
                             
                             <?php if($goldstar_filter_price == 1): ?>
-                            <div class="eli_price-filter eli_filter-item">
+                            <div class="eli_ctn_select eli_price-filter eli_filter-item">
                                 <select name="price" placeholder="Price" class="eli_select"  id="filter-by-price">
                                     <option value=""> Price </option>
                                     
@@ -109,6 +111,7 @@ $goldstar_price = array(
                                         <option value="<?php echo $index ?>"> <?php echo $price ?> </option>
                                     <?php endforeach; ?>
                                 </select>
+                                <span class="eli_hide_select"></span>
                             </div>
                             <?php endif; ?>
                         <div style="clear:both" ></div>
@@ -118,14 +121,13 @@ $goldstar_price = array(
                 <div class="eli_list" id="goldstar-list-feed">
                     
                     <?php
+                    $goldstar_options['category'] = isset($goldstar_options['category']) ? $goldstar_options['category'] : array();
                     $arr_events = Goldstar_Shortcode::get_list_events_data(array('page' => 1, 'plugin_territory_id' => $plugin_territory_id, 'category' => $goldstar_options['category']));
                     $total_event = count($arr_events);
                     
                     $html = Goldstar_Shortcode::get_html_list_events($arr_events, array('page' => 1, 'plugin_territory_id' => $plugin_territory_id));
                     echo $html;
                     ?>
-                    
-                    <div id="goldstar-loading" class="eli_hidden"></div>
                 </div>
                 <div class="eli_pagination" id="goldstar_pagination">
                 </div>

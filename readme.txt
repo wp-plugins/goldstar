@@ -7,7 +7,7 @@ Requires at least: 3.3
 
 Tested up to: 4.0
 
-Stable tag: 1.3.6
+Stable tag: 1.4
 License: GPLv2 or later
 
 
@@ -42,12 +42,24 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 7. Other requirements: *Write permission of goldstar/xml directory is required. *cURL extension is required. *simplexml extension is required. *json extension is required. *openssl extension is required.
 
+8. To add the featured offer teaser widget, on the main plugin admin form enter the slug of the page you are adding the main plugin to. IMPORTANT: If the slug you enter for the widget does not match the slug of the page you have added the main plugin to the widget will NOT display. For more information about slugs, you may wish to visit this page: http://codex.wordpress.org/Glossary#Slug
+
+9. From the main plugin admin form select the Featured Events tab to select the offers you would like to feature in the widget.
+
+10. Next, select Appearance > Widget from the left column and then drag the "Goldstar Teaser" widget to main sidebar position you prefer. Once positioned click to open the widget's display settings. You should enter a maximum number of offers to be featured (between 1 and 15). You may also select various font size and color attributes to customize the widget's appearance.
+
+11. Once you have completed the widget's display settings click "Save". Please note that the widget will only display those offers that have been manually selected and will not auto fill offers. Once all currently selected offers have expired, if no other offers have since been selected, the widget will automatically be suppressed from view.
+
 == Screenshots ==
 
 
-1. Admin affiliate ID, API key validation, display filters
-2. Admin display settings
-3. Front end search bar and discount offer
+1. Admin affiliate ID and API key validation configuration settings
+2. Admin plugin display settings
+3. Admin featured offer widget configuration settings
+4. Admin featured offer selection list
+5. Admin featured offer widget display settings
+6. Front end search bar and discount offer example
+7. Front end featured offer widget example
 
 == Changelog ==
 
@@ -86,4 +98,5 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 = 1.3.5 =
 * Default image size modification.
 = 1.3.6 =
-* Consolidated js files, modified default image size, modified container size.
+* Consolidated js files, modified default image size, modified container size
+= 1.4 =* Design modifications, new featured offer "teaser" widget

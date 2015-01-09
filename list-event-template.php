@@ -32,17 +32,21 @@ foreach ($arr_datas as $child):
 
     /// Image
     $image = (string)$child->image;
-    // 3264 - issue
-    $default_width = 250;
-    $_arr_search = array("https://i.gse.io", "http://i.gse.io");
-    $_arr_replace = array("http://images.goldstar.com");
-    $image = str_replace($_arr_search, $_arr_replace, $image);
-    if(preg_match('/\?([^=]+)=/', $image)) {
-        $image = $image.'&w='.$default_width;
+    $image = trim($image);
+    if($image !== "") {
+        // 3264 - issue
+        $default_width = 250;
+        $_arr_search = array("https://i.gse.io", "http://i.gse.io");
+        $_arr_replace = array("http://images.goldstar.com");
+        $image = str_replace($_arr_search, $_arr_replace, $image);
+        if(preg_match('/\?([^=]+)=/', $image)) {
+            $image = $image.'&w='.$default_width;
+        }
+        else {
+            $image = $image.'?w='.$default_width;
+        }
     }
-    else {
-        $image = $image.'?w='.$default_width;
-    }
+
 
 
     // Summary 
@@ -64,7 +68,9 @@ foreach ($arr_datas as $child):
     at <?php echo $venue_name.', '.$venue_address ?>
 </span>
 <div class="eli_row-main">
-    <a target="_blank" href="<?php echo $link ?>" class="eli_img eli_a"><img src="<?php echo $image ?>" class="eli_img" /></a>
+    <?php if($image !== ""): ?>
+        <a target="_blank" href="<?php echo $link ?>" class="eli_img eli_a"><img src="<?php echo $image ?>" class="eli_img" /></a>
+    <?php endif ?>
 
     <div class="eli_information">
         <div class="eli_information-inner">
@@ -114,10 +120,13 @@ foreach ($arr_datas as $child):
                     </span>
                 </div>
                 <?php endif; ?>
-                <div class="eli_button-container">
-                    <a target="_blank" href="<?php print $link ?>" class="eli_button eli_large"><span class="eli_span">Check Availability</span></a>
-                </div>
+
             </div>
+
+
+        </div>
+        <div class="eli_button-container">
+            <a target="_blank" href="<?php print $link ?>" class="eli_button eli_large"><span class="eli_span">Check Availability</span></a>
         </div>
     </div> <!--#information -->
 

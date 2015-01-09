@@ -19,23 +19,27 @@ function goldstar_register_options() {
  * - 2: make location var
  *  */
 function goldstar_validate_options($input) {
-    
-    extract($input, EXTR_PREFIX_ALL, 'goldstar'); 
-    
+
     $goldstar_options = get_option('goldstar_options');
     $input['api_key'] = trim ($input['api_key']); /* clean api key data before save! */
+
+    $input['has_change_api'] = false; // DO NOT DELETE IT. KEEP IT TO SAVE TO GOLDSTAR_OPTIONS
     
-    // Save xml file
-    $input['has_change_api'] = $goldstar_options['has_change_api'];
-    if($goldstar_options['api_key'] != $goldstar_api_key || $goldstar_options['territory_id'] != $goldstar_territory_id) {
+    /* check change api or territory id */
+    if($goldstar_options['api_key'] != $input['api_key'] || $goldstar_options['territory_id'] != $input['territory_id']) {
+
         /* construct funcion to save */
         $input['has_change_api'] = true;
+
+        /* Remove feature */
+        update_option('goldstar_featured_events', array());
+
     }
     
-    if($goldstar_api_valid === "1") {
+    if($input['api_valid'] === "1") {
         // Get location
         $arr_territory_id = array();
-        $arr_data = Goldstar_API::getTerritories($goldstar_api_key);
+        $arr_data = Goldstar_API::getTerritories($input['api_key']);
         foreach($arr_data as $i => $arr_item) {
             $arr_territory_id[] = $arr_item['id'];
         }        
@@ -47,7 +51,7 @@ function goldstar_validate_options($input) {
         }
 
     }
-    
+
     return $input;
 }
 
@@ -68,8 +72,12 @@ function do_css() {
 function do_jslibs() {
     wp_enqueue_script('editor');
     wp_enqueue_script('thickbox');
-    wp_enqueue_script( 'goldstar-admin', plugins_url('js/goldstar_admin.js', dirname(__FILE__)), array( 'jquery','wp-color-picker' ), '1.0' );
-    
+    wp_enqueue_script('wp-color-picker');
+    /* Don't load again in popup */
+    if(isset($_GET['page']) && $_GET['page'] === 'admin-goldstar') {
+        wp_enqueue_script( 'goldstar-admin', plugins_url('js/goldstar_admin.js', dirname(__FILE__)), array( 'jquery','wp-color-picker' ), '1.0' );
+    }
+
 }
 /*//*/
 
@@ -86,6 +94,11 @@ add_action('admin_menu', 'goldstar_admin_plugin_menu');
 
 /** Function for hook admin_menu. */
 function goldstar_admin_plugin_menu() {
+
+    // Add a submenu of admin menu: Use tab by css
+    add_submenu_page('admin-goldstar', '', 'Feature Events', 'administrator', 'goldstar-featured-events', 'goldstar_admin_feature_event');
+    add_submenu_page('admin-goldstar', 'Artsopolis Calendar Options', 'Configuration', 'administrator', 'admin-goldstar', 'goldstar_admin_plugin_options');
+
     add_plugins_page('Goldstar Options', 'Goldstar', 'manage_options', 'admin-goldstar', 'goldstar_admin_plugin_options');
 }
 
@@ -100,7 +113,7 @@ function goldstar_get_categories() {
         $arr_data = Goldstar_API::getCategories($api_key); // Data empty mean
         
         $goldstar_options = get_option('goldstar_options');
-        $arr_select_category = $goldstar_options['category'];
+        $arr_select_category = isset($goldstar_options['category']) ? $goldstar_options['category'] : array();
         $arr_list_territory_id = Goldstar_API::getTerritories($api_key); // save the first time for check territory
         
         echo json_encode(array(
@@ -148,6 +161,28 @@ function goldstar_admin_territori_list_html ($arr_data, $territory_id) {
 }
 /*//*/
 
+function goldstar_admin_feature_event() {
+
+    if ( isset( $_REQUEST['submit'] ) ) {
+
+        $sselected_events = isset( $_REQUEST['goldstar-selected-events'] ) && $_REQUEST['goldstar-selected-events'] ? $_REQUEST['goldstar-selected-events'] : array();
+
+        if(empty($sselected_events)) {
+            update_option('goldstar_featured_events', array());
+        }
+        else {
+            $arr_selected_events = explode(",", $sselected_events);
+            $arr_selected_events = array_map('intval', $arr_selected_events);
+            update_option('goldstar_featured_events', $arr_selected_events);
+        }
+    }
+
+    ob_start();
+    include __DIR__. '/_feature_events.php';
+    $html = ob_get_contents();
+    ob_clean();
+    echo $html;
+}
 /** Show content page goldstar. */
 function goldstar_admin_plugin_options() {
     if (!current_user_can('manage_options')) {
@@ -187,4 +222,16 @@ function goldstar_admin_plugin_options() {
     }
     
     include dirname(__FILE__) . '/_admin_template.php';
+}
+
+add_action('wp_ajax_goldstar_delete_image_by_url', 'goldstar_delete_image_by_url');
+
+function goldstar_delete_image_by_url() {
+    $goldstar_options = get_option('goldstar_options');
+
+    if (isset($goldstar_options['teaser_widget_logo_url']) ) {
+        $goldstar_options['teaser_widget_logo_url'] = '';
+        update_option('goldstar_options', $goldstar_options);
+    }
+    wp_die(1);
 }

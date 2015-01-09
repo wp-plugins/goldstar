@@ -19,7 +19,7 @@ class Goldstar_Shortcode {
     public static $page_size      = 20;
     public static $delimiter_date = '-';
     public static $territory_none = 'none';
-    private static $_goldstar_xml_name = 'goldstar-xml';
+
 
     public static $arr_display_filter = array(
         'START-DATE-ASC' => 'Start Date',
@@ -45,87 +45,6 @@ class Goldstar_Shortcode {
         add_action('wp_ajax_goldstar_get_feed', array(__CLASS__, 'goldstar_get_feed'));
     }
 
-    private static function _createDirContentXMl() {
-
-        $_upload = WP_CONTENT_DIR.'/uploads';
-
-        $_path_data_xml = $_upload;
-
-        if(!file_exists($_path_data_xml)) {
-            return array(
-                'error' => true,
-                'msg' => "Please create wp-content/uploads directory."
-                );
-        }
-
-        if(is_multisite()) {
-            $sites = get_blog_details(get_current_blog_id());
-            $_final_path_data_xml = $_path_data_xml = $_upload.'/'.self::$_goldstar_xml_name.'/'.$sites->domain;
-            if(file_exists($_path_data_xml)) {
-                if(!is_writable($_path_data_xml)) {
-                    return array(
-                        'error' => true,
-                        'msg' => "Please set write permission to <strong>$_path_data_xml</strong>."
-                    );
-                }
-                else {
-                    return array(
-                        'error' => false,
-                        'msg' => '',
-                        'path' => $_final_path_data_xml,
-                    );
-                }
-
-            }
-        }
-        else {
-            $_final_path_data_xml = $_path_data_xml = $_upload.'/'.self::$_goldstar_xml_name;
-        }
-
-        $_path_data_xml  = $_upload.'/'.self::$_goldstar_xml_name;
-        if(file_exists($_path_data_xml)) {
-            if(!is_writable($_path_data_xml)) {
-                return array(
-                    'error' => true,
-                    'msg' => "Please set write permission to <strong>$_path_data_xml</strong>."
-                );
-            }
-            else {
-                if(is_multisite()) {
-                    mkdir($_final_path_data_xml);
-                }
-
-                return array(
-                    'error' => false,
-                    'msg' => '',
-                    'path' => $_final_path_data_xml,
-                );
-            }
-        }
-
-        $_path_data_xml  = $_upload;
-
-        if(!is_writable($_path_data_xml)) {
-            return array(
-                'error' => true,
-                'msg' => "Please set write permission to <strong>$_path_data_xml</strong>."
-            );
-        }
-        else {
-
-            mkdir($_upload.'/'.self::$_goldstar_xml_name);
-            if(is_multisite()) {
-                mkdir($_final_path_data_xml);
-            }
-
-            return array(
-                'error' => false,
-                'msg' => '',
-                'path' => $_final_path_data_xml,
-            );
-        }
-
-    }
 
     public static function handle_shortcode($atts) {
         self::$add_script = true;
@@ -155,7 +74,7 @@ class Goldstar_Shortcode {
         }
         $plugin_territory_id = (int)$plugin_territory_id;
 
-        $_arrReceived = self::_createDirContentXMl();
+        $_arrReceived = Goldstar_Common::createDirContentXMl(Goldstar_Common::$_goldstar_dir_xml_name);
         if($_arrReceived['error']) {
             return $_arrReceived['msg'];
         }
@@ -176,7 +95,7 @@ class Goldstar_Shortcode {
         if ($goldstar_api_valid === "0") {
             return $str_error;
         }
-        
+
         if ($time >= $expired_time || $goldstar_has_change_api === true || !file_exists($filename)) {
             $url = Goldstar_API::$feed_link . '?api_key=' . $goldstar_api_key;
             if (!empty($plugin_territory_id)) {
@@ -241,7 +160,7 @@ class Goldstar_Shortcode {
 
         wp_register_script('goldstar-js', plugins_url('js/goldstar.js', __FILE__), array('jquery'), '1.0', true);
         wp_localize_script('goldstar-js', 'goldstar_obj', array(
-            'calendar_src' => plugins_url('goldstar/img/date-button.gif'),
+            'calendar_src' => plugins_url('goldstar/img/date-button.png'),
             'admin_url'    => admin_url('admin-ajax.php'),
         ));
     }
@@ -317,7 +236,7 @@ class Goldstar_Shortcode {
     public static function get_list_events_data($arr_filter) {
         $page_size = self::$page_size;
 
-        $_arrReceived = self::_createDirContentXMl();
+        $_arrReceived = Goldstar_Common::createDirContentXMl(Goldstar_Common::$_goldstar_dir_xml_name);
         if($_arrReceived['error']) {
             return $_arrReceived['msg'];
         }
@@ -328,7 +247,7 @@ class Goldstar_Shortcode {
 
         $xml = simplexml_load_file($filename);
             
-        $xpath_query = self::_get_xpath_query($arr_filter);
+        $xpath_query = Goldstar_Common::get_xpath_query($arr_filter);
         
         $events = $xml->xpath($xpath_query);
         
@@ -380,64 +299,7 @@ class Goldstar_Shortcode {
         return $html;
     }
 
-    /**
-     * Query xml by xpath
-     * 
-     * @param type $arr_filter
-     */
-    private static function _get_xpath_query($arr_filter) {
-        
-        $arr_condition = array();
-        if (!empty($arr_filter['from_date'])) {
-            $_date           = str_replace(self::$delimiter_date, '', $arr_filter['from_date']);
-            $arr_condition[] = "translate(upcoming_dates/event_date/date,'-', '') >= '$_date'";
-        }
 
-        if (!empty($arr_filter['to_date'])) {
-            $_date           = str_replace(self::$delimiter_date, '', $arr_filter['to_date']);
-            $arr_condition[] = "translate(upcoming_dates/event_date/date,'-', '') <= '$_date'";
-        }
-
-        if (!empty($arr_filter['location'])) {
-            $arr_condition[] = 'venue/address/locality="'.$arr_filter['location'].'"';
-        }
-        
-        $category_list_where = '';
-        if (!empty($arr_filter['category'])) {
-            if (is_array($arr_filter['category'])) {
-                $arr_categories_list = array();
-                foreach ($arr_filter['category'] as $category) {
-                    $arr_categories_list[] = 'category_list/category/name="'.$category.'"';
-                }
-                $arr_condition[] = '('. implode(' or ', $arr_categories_list) . ')';
-            } else {
-                $arr_condition[] = 'category_list/category/name="'.$arr_filter['category'].'"';
-            }
-        }
-        
-        if (!empty($arr_filter['price'])) {
-            /* Parse price */
-            if ($arr_filter['price'] === 'free') {
-                $arr_condition[] = "(translate(substring-before(our_price_range,'-'),' ','') = 'COMP' or our_price_range = 'COMP')";
-            } elseif (strpos($arr_filter['price'], '<') !== false) {
-                $_price          = (int) substr($arr_filter['price'], strpos($arr_filter['price'], '<') + 1);
-                $arr_condition[] = "(number(translate(substring-before(our_price_range,'-'),'$','')) < $_price or number(translate(substring-after(our_price_range,'-'),'$','')) < $_price)";
-            } elseif (strpos($arr_filter['price'], '>') !== false) {
-                $_price          = (int) substr($arr_filter['price'], strpos($arr_filter['price'], '>') + 1);
-                $arr_condition[] = "(number(translate(substring-before(our_price_range,'-'),'$','')) >= $_price or number(translate(substring-after(our_price_range,'-'),'$','')) >= $_price)";
-            } elseif (strpos($arr_filter['price'], '-') !== false) {
-                list($_start_price, $_end_price) = explode("-", $arr_filter['price']);
-                $arr_condition[] = "(number(translate(substring-before(our_price_range,'-'),'$','')) >= $_start_price or number(translate(substring-after(our_price_range,'-'),'$','')) >= $_start_price)";
-                $arr_condition[] = "(number(translate(substring-before(our_price_range,'-'),'$','')) < $_end_price or number(translate(substring-after(our_price_range,'-'),'$','')) < $_end_price)";
-            }
-        }
-        $xpath_query = 'event';
-        if (!empty($arr_condition)) {
-            $xpath_query .= '[' . implode(" and ", $arr_condition) . ']';
-        }
-        
-        return $xpath_query;
-    }
 
 }
 
@@ -465,8 +327,11 @@ function sort_by_start_date($a, $b) {
 
     $arr_b = $b->upcoming_dates->xpath('event_date');
 
-    $a_date = $arr_a[0]->date;
-    $b_date = $arr_b[0]->date;
+    $a_date = isset($arr_a[0]->date) ? $arr_a[0]->date : 0;
+    if($a_date == 0) return true;
+
+    $b_date = isset($arr_b[0]->date) ? $arr_b[0]->date : 0;
+    if($b_date == 0) return false;
 
     return strtotime($a_date) > strtotime($b_date);
 

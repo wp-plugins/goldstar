@@ -3,8 +3,14 @@
 // $goldstar_options['api_key']: api key
 // $goldstar_options['api_valid']: api valid or not
 // $is_show_error == false mean: at the first time don't save any api
+
+$goldstar_options['goldstar_slug'] = isset($goldstar_options['goldstar_slug']) ? $goldstar_options['goldstar_slug'] : '';
+$goldstar_options['teaser_widget_logo_url'] = isset($goldstar_options['teaser_widget_logo_url']) ? $goldstar_options['teaser_widget_logo_url'] : '';
+$goldstar_options['teaser_widget_logo_position'] = isset($goldstar_options['teaser_widget_logo_position'] ) ? $goldstar_options['teaser_widget_logo_position'] : '';
+$goldstar_options['teaser_widget_logo_link_to'] = isset($goldstar_options['teaser_widget_logo_link_to']) ? $goldstar_options['teaser_widget_logo_link_to'] : '';
 ?>
 
+<?php require_once '_admin_menu.php'; ?>
 <div class="wrap goldstar-admin">
     <?php settings_errors(); ?>
     <div id="icon-edit-pages" class="icon32"></div>
@@ -22,7 +28,7 @@
             <!--titlediv-->
             <div id="titlediv">
                 <div id="titlewrap">
-                    <input type="text" name="goldstar_options[title]" size="30" value="<?php echo $goldstar_options['title'] ?>" id="title" autocomplete="off" placeholder="Enter the title">
+                    <input type="text" name="goldstar_options[title]" size="30" value="<?php echo isset($goldstar_options['title']) ?  $goldstar_options['title'] : '' ?>" id="title" autocomplete="off" placeholder="Enter the title">
                 </div>
                 <div class="inside">
                     <div id="edit-slug-box" class="hide-if-no-js">
@@ -85,6 +91,86 @@
                     <?php wp_editor($goldstar_options['content'], 'content', array('textarea_name' => 'goldstar_options[content]')); ?>
                 </div> <!-- #goldstar-content-->
 
+                <div id="goldstar-widget-settings" class="postbox">
+                    <h3 class="hndle"><span>Teaser Widget Settings</span></h3>
+                    <div class="inside">
+                        <div class="goldstar-settings-display child">
+                            <h4 class="hndle"><span>URL Settings</span></h4>
+                            <div class="inside">
+                                <table class="form-table">
+                                    <tbody>
+                                    <tr valign="top">
+                                        <th scope="row">
+                                            <label for="settings-display-color">Goldstar's slug:</label>
+                                        </th>
+                                        <td>
+                                            <input name="goldstar_options[goldstar_slug]" type="text" id="goldstar-slug" value="<?php echo $goldstar_options['goldstar_slug'] ?>" class="regular-text code">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="goldstar-settings-display child">
+                            <h4 class="hndle"><span>Logo Settings</span></h4>
+                            <div class="inside">
+                                <table class="form-table">
+                                    <tbody>
+                                    <tr valign="top">
+                                        <th scope="row">
+                                            <label for="settings-display-color">URL:</label>
+                                        </th>
+                                        <td>
+                                            <input readonly="true" placeholder="Click to upload a new graphic" name="goldstar_options[teaser_widget_logo_url]" type="text" id="teaser-widget-logo-url" value="<?php echo $goldstar_options['teaser_widget_logo_url'] ?>" class="regular-text code">
+                                            <input  id="_upload-button" class="button" type="button" value="Upload Logo" />
+
+                                            <input opt-name="teaser_widget_logo_url" id="eli-delete-teaser-logo"
+                                                   image-url="<?php echo $goldstar_options['teaser_widget_logo_url'] ?>"
+                                                   class="delete-btn <?php if (! $goldstar_options['teaser_widget_logo_url']) echo 'hidden'; ?>"
+                                                   type="button" value="&nbsp;" />
+                                            <div>
+                                                <a id="eli-teaser-widget-logo-link" href="<?php echo $goldstar_options['teaser_widget_logo_url'] ?>">
+                                                    <img
+                                                        <?php if (! $goldstar_options['teaser_widget_logo_url'] ): ?>
+                                                            style="display: none"
+                                                        <?php endif; ?>
+                                                        class="thumb" src="<?php echo $goldstar_options['teaser_widget_logo_url'] ?>" />
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr valign="top">
+                                        <th scope="row">
+                                            <label for="settings-display-color">Position:</label>
+                                        </th>
+                                        <td>
+                                            <?php $teaser_widget_logo_position = $goldstar_options['teaser_widget_logo_position'] ?>
+                                            <select class="arts-select" name="goldstar_options[teaser_widget_logo_position]">
+                                                <option <?php echo $teaser_widget_logo_position == 'b_left' ? 'selected' : '' ?> value="b_left">Bottom - Left</option>
+                                                <option <?php echo $teaser_widget_logo_position == 'b_right' ? 'selected' : '' ?> value="b_right">Bottom - Right</option>
+                                                <option <?php echo $teaser_widget_logo_position == 'b_center' ? 'selected' : '' ?> value="b_center">Bottom - Center</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr valign="top">
+                                        <th scope="row">
+                                            <label for="settings-display-color">Link to:</label>
+                                        </th>
+                                        <td>
+                                            <input name="goldstar_options[teaser_widget_logo_link_to]" type="text" id="teaser-widget-logo-link-to" value="<?php echo $goldstar_options['teaser_widget_logo_link_to'] ?>" class="regular-text code">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div id="goldstar-settings" class="postbox">
                     <h3 class="hndle"><span>Plugin Display Settings</span></h3>
                     <div class="inside">
@@ -96,14 +182,14 @@
 
                                 <table class="form-table">
                                     <tbody>
-                                        <tr valign="top">
-                                            <th scope="row">
-                                                <label for="settings-display-color">Navigation background color:</label>
-                                            </th>
-                                            <td>
-                                                <input name="goldstar_options[settings_display_color]" type="text" id="settings-display-color" value="<?php echo $goldstar_options['settings_display_color'] ?>" class="regular-text code">
-                                            </td>
-                                        </tr>
+<!--                                        <tr valign="top">-->
+<!--                                            <th scope="row">-->
+<!--                                                <label for="settings-display-color">Navigation background color:</label>-->
+<!--                                            </th>-->
+<!--                                            <td>-->
+<!--                                                <input name="goldstar_options[settings_display_color]" type="text" id="settings-display-color" value="--><?php //echo $goldstar_options['settings_display_color'] ?><!--" class="regular-text code">-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
 
                                         <tr valign="top">
                                             <th scope="row">

@@ -217,7 +217,86 @@ function hideLoading() {
             }
 
             return true;
-        })
-    });
+        });
+
+        var formfieldselector = '#teaser-widget-logo-url';
+
+        var formfield   = $(formfieldselector); //The input field that will hold the uploaded file url
+        var thumb       = $("#eli-teaser-widget-logo-link img");
+        var remove_btn      = $("#eli-delete-teaser-logo");
+
+        // Upload logo
+        bind_upload_event();
+
+        function bind_upload_event () {
+            /* user clicks button on custom field, runs below code that opens new window */
+            jQuery('#_upload-button').click(function() {
+                formfield   = $(formfieldselector);
+                tb_show('','media-upload.php?TB_iframe=true');
+                return false;
+            });
+
+            // user inserts file into post. only run custom if user started process using the above process
+            // window.send_to_editor(html) is how wp would normally handle the received data
+
+            window.goldstar_send_to_editor = window.send_to_editor;
+            window.send_to_editor = function(html){
+
+                if (formfield) {
+                    var fileurl = jQuery('img',html).attr('src');
+                    formfield.val(fileurl);
+                    remove_btn.attr('image-url', fileurl);
+                    remove_btn.removeClass('hidden');
+                    remove_btn.show();
+                    remove_btn.attr('disabled', false);
+                    thumb.show();
+                    thumb.attr('src', fileurl);
+                    thumb.parent().attr('href', fileurl);
+                    tb_remove();
+                    formfield = null;
+                } else {
+                    window.goldstar_send_to_editor(html);
+                }
+            };
+        }
+
+        $('#eli-delete-teaser-logo').on('click', delete_image_by_url);
+        function delete_image_by_url() {
+
+            var image       = $(this),
+                image_url   = image.attr('image-url');
+
+            if (! image_url) {
+                console.log('Do not have image-url attribute');
+                return false;
+            }
+
+            if(confirm('Are you sure ?')) {
+
+                $.ajax({
+                    url: goldstar_obj.admin_url,
+                    type: 'post',
+                    data: {
+                        'action': 'goldstar_delete_image_by_url'
+                    },
+                    beforeSend: function() {
+                        showLoading();
+                        image.hide();
+                        thumb.hide();
+                    },
+                    success: function(res) {
+                        formfield.val('');
+                        image.hide();
+                        remove_btn.hide();
+                        hideLoading();
+                    },
+                    error: function(errorThrown) {
+
+                    }
+                });
+            }
+        };
+
+    }); /* -End dom ready */
 
 })(jQuery);

@@ -13,7 +13,7 @@
 
 
         /* START PAGINATION AT FIRST */
-        if(goldstar_paging.total_event != 0 ) {
+        if(goldstar_paging.total_event != 0  && (parseInt(goldstar_paging.total_event) > parseInt(goldstar_paging.page_size))) {
             $("#goldstar_pagination").removeClass('eli_hidden');
             $("#goldstar_pagination").pagination({
                 items: goldstar_paging.total_event,
@@ -86,52 +86,12 @@
         });*/
 
         $.fn.goldstar_showLoading = function($jmain_element) {
-            try {
-                var $r_left = 0;
-                var $r_top = 0;
-                var $r_width = 0;
-                var $r_height = 0;
 
-                /* caculate position to show loading */
-                var $screen_width = $(window).width();
-                var $screen_height = $(window).height();
-
-                var $c_left =$jmain_element.position().left;
-                var $c_width = $jmain_element.outerWidth();
-
-                var $c_top = $jmain_element.position().top;
-                var $c_height = $jmain_element.outerHeight();
-
-                var $screen_top_on_d = document.documentElement.scrollTop || document.body.scrollTop;
-                var $screen_left_on_d = document.documentElement.scrollLeft || document.body.scrollLeft;
-
-                $r_left = $c_left;
-                $r_top = $screen_top_on_d - $jmain_element.offset().top
-                $r_width = $c_width;
-
-                $r_height = $c_height;
-
-                if($screen_top_on_d < $c_top && $screen_top_on_d + $screen_width > $c_top && $screen_top_on_d + $screen_width < $c_top + $c_height) {
-                    $r_height = $screen_top_on_d + $screen_height - $jmain_element.offset().top;
-                }
-                else if($screen_top_on_d >= $c_top && $screen_top_on_d + $screen_width >= $c_top && $screen_top_on_d + $screen_width <= $c_top + $c_height) {
-                    $r_height = $screen_height;
-                }
-                else if($screen_top_on_d >= $c_top && $screen_top_on_d + $screen_width >= $c_top && $screen_top_on_d + $screen_width > $c_top + $c_height) {
-                    $r_height = $jmain_element.offset().top + $c_height - $screen_top_on_d;
-                }
-                $jmain_element.append('<div class="goldstar-loading" style="left: '+$r_left+'px; top : '+$r_top+'px; width : '+$r_width+'px; height : '+$r_height+'px"></div>');;
-                //console.log('<div class="goldstar-loading" style="left: '+$r_left+'px; top : '+$r_top+'px; width : '+$r_width+'px; height : '+$r_height+'px"></div>');
-            }
-            catch(e){
-                console.log(e);
-            }
+            var _top = $(window).scrollTop() + ($(window).height()/2) - 24 - $jmain_element.offset().top;
+            $jmain_element.append('<div class="goldstar-loading" style="top:'+_top+'px"></div>');;
 
           };
 
-        $.fn.goldstar_hideLoading = function() {
-            $("#goldstar-loading").addClass('eli_hidden');
-        };
 
         $("#choice-today").click(function() {
             var $_this = $(this);
@@ -228,14 +188,16 @@
                 dataType: 'html',
                 success: function(data) {
 
-
                     /* This outputs the result of the ajax request */
                     var $_container_row = $("#goldstar-list-feed");
                     $_container_row.html(data);
 
+                    var _itotal_e_page = parseInt(goldstar_paging.total_event);
+                    var _ipagesize = parseInt(goldstar_paging.page_size);
+
                     if($_repagination ==='yes') {
                         /* PAGINATION */
-                        if(goldstar_paging.total_event != 0 ) {
+                        if(goldstar_paging.total_event != 0 && _itotal_e_page > _ipagesize ) {
                             $("#goldstar_pagination").removeClass('eli_hidden');
                             $("#goldstar_pagination").pagination({
                                 items: goldstar_paging.total_event,
@@ -308,13 +270,13 @@
         /* DETECT VIEW PORT */
         $.fn.detectViewPort = function() {
 
-            /*  LIMIT AT 250PX */
+            /*  LIMIT AT 480PX */
             var $_container_width = $("#goldstar-list-feed").width();
             if($_container_width <= 480) {
-                $(".goldstar-frontend").addClass('goldstar-mobile');
+                $(".goldstar-frontend").parent().addClass('goldstar-mobile');
             }
             else {
-                $(".goldstar-frontend").removeClass('goldstar-mobile');
+                $(".goldstar-frontend").parent().removeClass('goldstar-mobile');
             }
         };
         
