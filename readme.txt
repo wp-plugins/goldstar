@@ -44,7 +44,7 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 8. To add the featured offer teaser widget, on the main Goldstar plugin admin form enter the slug of the page you are adding the main Goldstar plugin to. IMPORTANT: If the slug you enter for the widget does not match the slug of the page you have added the main Goldstar plugin to the widget will NOT display. For more information about slugs, you may wish to visit this page: http://codex.wordpress.org/Glossary#Slug
 
-9. From the main Goldstar plugin Settings admin form select the "Featured Events" tab to select the specific event offers you would like to feature in the widget.  This tab is located at the top of form next to the “Configuration” tab just above the “Add New Post” field.
+9. From the main Goldstar plugin Settings admin form select the "Featured Events" tab to select the specific event offers you would like to feature in the widget.  This tab is located at the top of form next to the "Configuration" tab just above the "Add New Post" field.
 
 10. Next, select Appearance > Widget from the left column and then drag the "Goldstar Teaser" widget to main sidebar position you prefer. Once positioned click to open the widget's display settings. You should enter a maximum number of offers to be featured (between 1 and 15). You may also select various font size and color attributes to customize the widget's appearance.
 
