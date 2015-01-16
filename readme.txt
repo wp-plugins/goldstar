@@ -42,9 +42,9 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 7. Other requirements: *Write permission of goldstar/xml directory is required. *cURL extension is required. *simplexml extension is required. *json extension is required. *openssl extension is required.
 
-8. To add the featured offer teaser widget, on the main plugin admin form enter the slug of the page you are adding the main plugin to. IMPORTANT: If the slug you enter for the widget does not match the slug of the page you have added the main plugin to the widget will NOT display. For more information about slugs, you may wish to visit this page: http://codex.wordpress.org/Glossary#Slug
+8. To add the featured offer teaser widget, on the main Goldstar plugin admin form enter the slug of the page you are adding the main Goldstar plugin to. IMPORTANT: If the slug you enter for the widget does not match the slug of the page you have added the main Goldstar plugin to the widget will NOT display. For more information about slugs, you may wish to visit this page: http://codex.wordpress.org/Glossary#Slug
 
-9. From the main plugin admin form select the Featured Events tab to select the offers you would like to feature in the widget.
+9. From the main Goldstar plugin Settings admin form select the "Featured Events" tab to select the specific event offers you would like to feature in the widget.  This tab is located at the top of form next to the “Configuration” tab just above the “Add New Post” field.
 
 10. Next, select Appearance > Widget from the left column and then drag the "Goldstar Teaser" widget to main sidebar position you prefer. Once positioned click to open the widget's display settings. You should enter a maximum number of offers to be featured (between 1 and 15). You may also select various font size and color attributes to customize the widget's appearance.
 
@@ -96,7 +96,7 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 * Move xml file to wp-content/uploads/goldstar-xml folder
 
 = 1.3.5 =
-* Default image size modification.
+* Default image size modification
 = 1.3.6 =
 * Consolidated js files, modified default image size, modified container size
 = 1.4 =* Design modifications, new featured offer "teaser" widget
