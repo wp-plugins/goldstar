@@ -5,9 +5,9 @@ Contributors: nhanlt, tuanphp, jef
 Tags: goldstar, ticket, discount
 Requires at least: 3.3
 
-Tested up to: 4.0
+Tested up to: 4.2.2
 
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 
 
@@ -36,7 +36,7 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 4. Under "Display Settings" you can select the sort order for the offer list and which territory you would like to list offers for. Select a Territory ID from the list link and then enter that ID number into the Territory ID field. Territories correspond to the cities served by Goldstar.
 
-5. Click "Save Changes." Once your changes are saved go to “Pages” on your dashboard and create a “New Page”. Add a title like “Half Price Tickets” or “Discount Tickets”. In the body text area, add the following snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number and make sure to include the brackets.
+5. Click "Save Changes." Once your changes are saved go to "Pages" on your dashboard and create a "New Page". Add a title like "Half Price Tickets" or "Discount Tickets". In the body text area, add the following snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number and make sure to include the brackets.
 
 6. If you would like to add more than one territory to your web site you will need to set up a separate page and add the same code snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number. You may create as many additional territories as you wish by following this format. You have access to all Goldstar territories.
 
