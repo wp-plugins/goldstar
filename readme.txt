@@ -32,13 +32,13 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 
 2. After installing the plugin contact Goldstar to obtain valid API key and Affiliate ID number, [Goldstar Affiliate Program](http://www.goldstar.com/company/affiliate_program).
 
-3. Click on the "Settings" link for the Goldstar plugin to build a Half-Price Tickets Page. Enter the API key and Affiliate ID number. The API key is a long alphanumeric text string and the Affiliate ID is a 4-digit number.
+3. Click on the "Settings" link for the Goldstar plugin to build a Half-Price Tickets Page. Enter the API key and Affiliate ID number. The API key is a long alphanumeric text string and the Affiliate ID is a 4-digit number. Leave the Title and Body Text areas blank on this page.
 
-4. Under "Display Settings" you may enter a custom background color for your search bar, sort order for the offer list, and which territory you would like to list offers for. Select a territory ID from the list link and then enter that ID number into the Territory ID field. Territories correspond to the cities served by Goldstar.
+4. Under "Display Settings" you can select the sort order for the offer list and which territory you would like to list offers for. Select a Territory ID from the list link and then enter that ID number into the Territory ID field. Territories correspond to the cities served by Goldstar.
 
-5. Click "Save Changes." Once your changes are saved add the following string to a page on your site - including brackets and insert: [goldstar-plugin]
+5. Click "Save Changes." Once your changes are saved go to “Pages” on your dashboard and create a “New Page”. Add a title like “Half Price Tickets” or “Discount Tickets”. In the body text area, add the following snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number and make sure to include the brackets.
 
-6. If you would like to add more than one territory you will need to set up a separate page or section and add the following snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number. You may create as many additional territories as you wish by following this format.
+6. If you would like to add more than one territory to your web site you will need to set up a separate page and add the same code snippet: [goldstar-plugin hour=1 territory_id=#]. Replace "#" with the appropriate territory ID number. You may create as many additional territories as you wish by following this format. You have access to all Goldstar territories.
 
 7. Other requirements: *Write permission of goldstar/xml directory is required. *cURL extension is required. *simplexml extension is required. *json extension is required. *openssl extension is required.
 
@@ -100,3 +100,4 @@ This plugin requires a valid API key and Affiliate ID number as issued by Goldst
 = 1.3.6 =
 * Consolidated js files, modified default image size, modified container size
 = 1.4 =* Design modifications, new featured offer "teaser" widget
+= 1.4.1 =* Readme file updates, modified screenshot
